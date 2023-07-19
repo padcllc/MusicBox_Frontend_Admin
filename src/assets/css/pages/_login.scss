@@ -1,3 +1,184 @@
-.text{
-    color: red;
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
+
+.login_main {
+  // border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 100vh;
+
+  .left_side {
+    width: 410px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+
+    img {
+      height: 100%;
+      width: 410px;
+      position: absolute;
+      display: flex;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .description {
+      z-index: 9;
+      position: relative;
+      display: flex;
+      display: flex;
+      flex-direction: column;
+
+      .title {
+        color: #FFFFFF;
+        font-size: 60px;
+        font-weight: 700;
+        font-family: 'Roboto', sans-serif;
+        margin: 0 37px;
+      }
+
+      p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 40px;
+        letter-spacing: 0em;
+        text-align: left;
+        color: #FFFFFF;
+        margin: 60px 37px;
+
+      }
+    }
+  }
+
+  .disk_animate_content {
+    position: absolute;
+    left: -85px;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+
+    .information_content {
+      position: absolute;
+      left: 375px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      flex-direction: column;
+
+      .information_title {
+        color: #000000;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+        font-family: 'Roboto', sans-serif;
+        margin: 4px 0;
+      }
+
+      .info {
+        color: #000000;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 17px;
+        font-family: 'Roboto', sans-serif;
+      }
+      .email{
+        width: 70px;
+        margin-left: 240px;
+      }
+      .email_info{
+        margin-left: 235px;
+        width: 63px;
+        line-break: anywhere;
+      }
+      .phone{
+        margin-left: 225px;
+      }
+
+      .phone_info{
+        margin-left: 188px;
+      }
+      .location {
+        margin-left: 65px;
+      }
+
+      .location_info {
+        margin-left: 145px;
+        width: 95px;
+        padding: 5px 0 16px 0;
+        text-align: end;
+      }
+      .reserved_info{
+        margin-left: 108px;
+        width: 115px;
+        padding: 20px 0 16px 0;
+        text-align: end;
+      }
+    }
+  }
+
+  .reload {
+    height: 100%;
+    position: absolute;
+    -webkit-animation: spin 10s linear infinite;
+    -moz-animation: spin 10s linear infinite;
+    animation: spin 10s linear infinite;
+  }
+
+  @-webkit-keyframes spin {
+    100% {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+
+  @keyframes spin {
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.right_side {
+  display: flex;
+  align-items: center;
+  width: 50%;
+
+  Form {
+    margin: auto;
+  }
+
+  .remember_me_content {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+  }
+
+  .remember_me {
+    color: rgba(0, 0, 0, 85%);
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    font-family: 'Roboto';
+  }
+
+  .forgot_password_title {
+    color: #000000;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    font-family: 'Roboto';
+    cursor: pointer;
+
+  }
 }

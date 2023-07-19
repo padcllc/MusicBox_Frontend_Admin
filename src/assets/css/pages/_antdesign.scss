@@ -1,0 +1,54 @@
+.ant-form-item {
+    margin-bottom: 0;
+    vertical-align: unset;
+}
+
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-form-item .ant-form-item-control-input{
+    min-height: unset;
+}
+
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover .ant-checkbox-checked:not(.ant-checkbox-disabled):after{
+    border-color: #DBB682 !important;
+}
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-checkbox-checked:after{
+    border-color:2px solid #DBB682 !important;
+}
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-checkbox-checked .ant-checkbox-inner{
+    background-color: #DBB682 !important;
+    border-color: #DBB682 !important;
+}
+
+
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover .ant-checkbox-inner, :where(.css-dev-only-do-not-override-1sn0ohr).ant-checkbox:not(.ant-checkbox-disabled):hover .ant-checkbox-inner{
+    border-color: #DBB682 !important;
+}
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-checkbox-checked:after{
+    border-color:2px solid #DBB682 !important;
+}
+
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-checkbox-checked:hover{
+    border-color:2px solid #DBB682 !important;
+    border-color: #DBB682 !important;
+}
+
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-checkbox-checked:after{
+    border-color:2px solid #DBB682 !important;
+    border-color: #DBB682 !important;
+}
+.ant-checkbox-checked:after{
+    border-color:2px solid #DBB682 !important;
+    border-color: #DBB682 !important;
+}
+
+
+/////////input 
+
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-input:hover{
+    border-color: #DBB682 !important;
+    border-inline-end-width: 1px;
+}
+
+.ant-input:focus {
+    border-color: #DBB682 !important;
+     outline: 0 !important; 
+}
