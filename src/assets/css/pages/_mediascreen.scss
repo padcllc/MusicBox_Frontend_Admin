@@ -1,0 +1,52 @@
+@media only screen and (max-width: 1500px)  {
+    .login_main .left_side img{
+        width: 310px !important;
+    }
+    .login_main .left_side .description .title{
+        font-size: 45px;
+    }
+    .login_main .disk_animate_content{
+        left: -185px;
+    }
+    .login_main .left_side{
+        width: 320px !important;
+    }
+    .login_main .left_side .description p{
+        margin: 60px 15px;
+        font-size: 17px;
+    }
+    .login_main .reload{
+        width: 980px;
+    }
+}
+
+@media only screen and (max-width: 1350px)  {
+    .login_main .left_side img{
+        width: 270px !important;
+    }
+    .login_main .left_side .description .title{
+        font-size: 45px;
+    }
+    .login_main .disk_animate_content{
+        left: -230px;
+    }
+    .login_main .left_side{
+        width: 275px !important;
+    }
+    .login_main .left_side .description p{
+        margin: 60px 5px;
+        font-size: 15px;
+    }
+    .login_main .reload{
+        width: 970px;
+    }
+    .login_main .disk_animate_content .information_content{
+        left: 380px;
+    }
+    .login_main .disk_animate_content .information_content .reserved_info{
+        margin-left: 78px;
+    }
+    .login_main .disk_animate_content .information_content .email{
+        margin-left: 232px;
+    }
+}
