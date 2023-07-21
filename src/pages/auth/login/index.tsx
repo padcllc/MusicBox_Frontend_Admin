@@ -1,7 +1,7 @@
-import left_side_img from '../../assets/images/auth_img.png';
-import disk from '../../assets/images/disk.png';
+import left_side_img from '../../../assets/images/auth_img.png';
+import disk from '../../../assets/images/disk.png';
 
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Checkbox, Form, Input } from 'antd';
 
 export function Login() {
 
@@ -12,7 +12,7 @@ export function Login() {
     return (
         <>
 
-            <div className="login_main">
+            <div className="main_page">
                 <div className="animate__animated animate__fadeInLeft disk_animate_content">
                 
                     <img src={disk} className="reload" />

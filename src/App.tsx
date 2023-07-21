@@ -2,12 +2,12 @@ import "./App.css";
 import "./assets/css/style.scss";
 import 'animate.css';
 
-import { Login } from "./pages/index";
+import { Routes } from "./routes/routes";
 
 function App() {
   return (
     <div className="App">
-      <Login/>
+        <Routes/>
     </div>
   )
 }
