@@ -107,7 +107,7 @@ export function Registration() {
                 <div className='registration_left_sids_description'>
                 
                         <p className='title'>MusicBox</p>
-                        <p>Duis tellus aenean id tellus eu ut sit magna magna. At ornare iaculis feugiat nullam morbi ut interdum. </p>
+                        <p className='description'>Duis tellus aenean id tellus eu ut sit magna magna. At ornare iaculis feugiat nullam morbi ut interdum. </p>
                     </div>
              
                     </div>

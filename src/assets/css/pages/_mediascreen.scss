@@ -2,6 +2,12 @@
     .main_page .left_side img{
         width: 310px !important;
     }
+    .registration_left_content .registration_left_sids{
+        width: 310px !important;
+    }
+    .registration_left_content .registration_disk_animate_content{
+        width: 78%;
+    }
     .main_page .left_side .description .title{
         font-size: 45px;
     }
@@ -18,10 +24,14 @@
     .main_page .reload{
         width: 980px;
     }
+  
 }
 
 @media only screen and (max-width: 1350px)  {
     .main_page .left_side img{
+        width: 270px !important;
+    }
+    .registration_left_content .registration_left_sids{
         width: 270px !important;
     }
     .main_page .left_side .description .title{
@@ -49,4 +59,15 @@
     .main_page .disk_animate_content .information_content .email{
         margin-left: 232px;
     }
+
+        .registration_left_sids_description .description{
+             font-size: 15px !important;
+             margin: 30px 0px !important;
+             padding: 0 5px !important;
+         }
+         .registration_left_sids_description .title{
+            font-size: 50px !important;
+            margin:  0px !important;
+        }
+     
 }
