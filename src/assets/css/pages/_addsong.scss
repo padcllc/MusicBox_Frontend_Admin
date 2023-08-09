@@ -1,0 +1,57 @@
+.add_song_modal {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    .add_song_modal_contert {
+        background: rgba(255, 255, 255, 1);
+        width: 1200px;
+        height: 666px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+
+        .modal_left_content {
+            background-image: url('../../../../src/assets/images/modal_fram.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100%;
+            width: 380px;
+            display: flex;
+            align-items: center;
+
+            img {
+                object-fit: fill;
+                margin-left: 100px;
+            }
+        }
+
+        .modal_right_content {
+            display: flex;
+            flex-direction: column;
+            margin: 54px 132px 0 0;
+
+            .form_content {
+                form {
+                    display: flex;
+                    flex-direction: column;
+
+                    .btn {
+                        margin-top: 100px;
+                    }
+                }
+            }
+        }
+
+    }
+}

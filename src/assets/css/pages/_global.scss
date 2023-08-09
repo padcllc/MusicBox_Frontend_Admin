@@ -16,25 +16,146 @@
 
 
 .input {
+    background: rgba(194, 194, 194, 1);
     width: 400px;
     border-radius: 30px;
-    // border: 1px solid rgba(0, 0, 0, 80%);
-    // outline: none;
+     outline: none;
     padding: 16px 25px;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 14px !important;
+    font-weight: 400;
     line-height: 17px;
-    color: rgba(178,178,178,255);
-    font-family: 'Inter', sans-serif;
+    color: rgba(178, 178, 178, 255);
+    font-family: 'Inter';
     background-color: unset;
     margin-top: 32px;
+    border: 1px solid rgba(194, 194, 194, 1);
 }
 
 .input::placeholder {
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 14px !important;
+    font-weight: 400;
     line-height: 17px;
-    color: rgba(178,178,178,255);
-    font-family: 'Inter', sans-serif;
+    color: rgba(178, 178, 178, 255);
+    font-family: 'Inter';
 }
 
+
+
+
+.search_input::placeholder {
+    color: rgba(0, 0, 0, 0.5);;
+    line-height: 19px;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+}
+
+.header_contet {
+    width: 100%;
+    padding: 30px 40px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+
+    .search_input_content {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: space-between;
+        border: 1px solid #C2C2C2;
+        width: 409px;
+        border-radius: 30px;
+        padding: 0 10px 0 16px;
+        height: 40px;
+
+        .search_icon {
+            cursor: pointer;
+        }
+
+        .search_input {
+            background: none;
+            outline: none;
+            border: none;
+            padding: 0 20px 0 0;
+            width: 100%;
+            color: rgba(0, 0, 0, 0.5);
+            line-height: 19px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+    }
+
+    .setting_icon {
+        cursor: pointer;
+    }
+}
+
+.page_content {
+    .page_title {
+        color: #000000;
+        font-family: 'Inter', sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 29px;
+        letter-spacing: 0em;
+        text-align: left;
+        margin: 31px 0 36px 40px;
+
+    }
+}
+
+
+.ant-pagination {
+    display: none !important;
+}
+
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-table-wrapper .ant-table-thead>tr>th,
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-table-wrapper .ant-table-thead>tr>td {
+    background: none !important;
+}
+
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before,
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-table-wrapper .ant-table-thead>tr>td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+    content: unset !important;
+}
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-table-wrapper .ant-table-tbody >tr.ant-table-row:hover>th, :where(.css-dev-only-do-not-override-1sn0ohr).ant-table-wrapper .ant-table-tbody >tr.ant-table-row:hover>td, :where(.css-dev-only-do-not-override-1sn0ohr).ant-table-wrapper .ant-table-tbody >tr >th.ant-table-cell-row-hover, :where(.css-dev-only-do-not-override-1sn0ohr).ant-table-wrapper .ant-table-tbody >tr >td.ant-table-cell-row-hover{
+    background: none !important;
+    //border: none !important;
+}
+
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-layout{
+    background: none;
+}
+
+
+th, td, .ant-table-cell{
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 400 ;
+    line-height: 22px;
+    letter-spacing: 0em; 
+    text-align: left;
+    color: #000000;
+    cursor: pointer;
+}
+td{
+border: none !important;
+
+}
+tr{
+    border-bottom: 1px solid rgba(217, 217, 217, 1) !important;
+}
+
+.ant-table-row:hover{
+    background: rgba(219, 182, 130, 0.2) !important;
+}
+
+.error_message{
+font-family: 'Inter';
+font-weight: 400;
+line-height: 22px;
+letter-spacing: 0em;
+color: rgba(219, 182, 130, 1);
+}

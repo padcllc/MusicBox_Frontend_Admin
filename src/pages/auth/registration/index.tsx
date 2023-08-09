@@ -1,5 +1,4 @@
-import { Checkbox, Form, Input } from 'antd';
-import left_side_img from '../../../assets/images/auth_img.png';
+import { Form, Input } from 'antd';
 import disk from '../../../assets/images/disk.png';
 
 
@@ -71,21 +70,6 @@ export function Registration() {
                         </Form.Item>
                     </Form>
                 </div>
-                {/* <div className="animate__animated animate__fadeInLeft disk_animate_content">
-
-                    <img src={disk} className="reload" />
-                    <div className='information_content'>
-                        <p className='information_title'>Address</p>
-                        <p className='information_title location'>Location</p>
-                        <p className="info location_info">Mher Mkrtchyan 47/1 Gyumri, Armenia</p>
-                        <p className='information_title email'>Send Us An Email</p>
-                        <p className="info email_info">musicbox@gmail.com</p>
-                        <p className='information_title phone'>Phone</p>
-                        <p className="info phone_info">(+374)94562112</p>
-                        <p className="info reserved_info">C 2021 PADC LLC All Rights Reserved</p>
-
-                    </div>
-                </div> */}
                
               <div className='registration_left_content'>
               <div className="animate__animated animate__fadeInRight registration_disk_animate_content">

@@ -1,0 +1,214 @@
+.song_content {
+    .header {
+        background-image: url('../../../../src/assets/images/song_header.svg');
+        height: 315px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .song_footer_content{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .add_btn {
+        width: 37px;
+        height: 37px;
+        border-radius: 50%;
+        background: none;
+        border: 1px solid #530804;
+        cursor: pointer;
+        outline: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .btn_content{
+        display: flex;  
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        padding: 0px 40px;
+        margin-top: 146px;
+    }
+    .headphone_content{
+        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        img{
+            height: 213px;
+        }
+    }
+}
+.song_title_content{
+  display: flex;
+}
+.song_title{
+  margin-left: 8px;
+  font-family: 'Inter';
+font-size: 16px;
+font-weight: 700;
+line-height: 19px;
+letter-spacing: 0em;
+text-align: left;
+color: rgba(0, 0, 0, 1);
+
+}
+
+
+/////////////////////////////////////
+
+
+.sound-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sound-wave {
+  //width: 150px;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+  .bar {
+    display: block;
+    width: 2px;
+    margin-right: 1px;
+    height: 90px;
+    background: #000000;
+    animation: sound 0ms -800ms linear infinite alternate;
+    transition: height 0.8s;
+  }
+}
+
+@keyframes sound {
+    0% {
+       opacity: .35;
+        height: 6px; 
+    }
+    100% {
+        opacity: 1;       
+        height:46px;
+    }
+}
+
+.bar:nth-child(1)  { height: 2px; animation-duration: 474ms;margin: 0 5px; }
+.bar:nth-child(2)  { height: 10px; animation-duration: 433ms;margin: 0 5px; }
+.bar:nth-child(3)  { height: 18px; animation-duration: 407ms;margin: 0 5px; }
+.bar:nth-child(4)  { height: 26px; animation-duration: 458ms;margin: 0 5px; }
+.bar:nth-child(5)  { height: 30px; animation-duration: 400ms;margin: 0 5px; }
+.bar:nth-child(6)  { height: 32px; animation-duration: 427ms;margin: 0 5px; }
+.bar:nth-child(7)  { height: 34px; animation-duration: 441ms;margin: 0 5px; }
+.bar:nth-child(8)  { height: 36px; animation-duration: 419ms;margin: 0 5px; }
+.bar:nth-child(9)  { height: 40px; animation-duration: 487ms;margin: 0 5px; }
+.bar:nth-child(10) { height: 46px; animation-duration: 442ms;margin: 0 5px; }
+.bar:nth-child(11)  { height: 2px; animation-duration: 474ms;margin: 0 5px; }
+.bar:nth-child(12)  { height: 10px; animation-duration: 433ms;margin: 0 5px; }
+.bar:nth-child(13)  { height: 18px; animation-duration: 407ms;margin: 0 5px; }
+.bar:nth-child(14)  { height: 26px; animation-duration: 458ms;margin: 0 5px; }
+.bar:nth-child(15)  { height: 30px; animation-duration: 400ms;margin: 0 5px; }
+.bar:nth-child(16)  { height: 32px; animation-duration: 427ms;margin: 0 5px; }
+.bar:nth-child(17)  { height: 34px; animation-duration: 441ms;margin: 0 5px; }
+.bar:nth-child(18)  { height: 36px; animation-duration: 419ms;margin: 0 5px; }
+.bar:nth-child(19)  { height: 40px; animation-duration: 487ms;margin: 0 5px;}
+.bar:nth-child(20) { height: 46px; animation-duration: 442ms;margin: 0 5px; }
+.bar:nth-child(21)  { height: 2px; animation-duration: 474ms;margin: 0 5px; }
+.bar:nth-child(22)  { height: 10px; animation-duration: 433ms;margin: 0 5px; }
+.bar:nth-child(23)  { height: 18px; animation-duration: 407ms;margin: 0 5px; }
+.bar:nth-child(24) { height: 46px; animation-duration: 442ms;margin: 0 5px; }
+.bar:nth-child(25)  { height: 2px; animation-duration: 474ms;margin: 0 5px; }
+.bar:nth-child(26)  { height: 10px; animation-duration: 433ms;margin: 0 5px; }
+.bar:nth-child(27)  { height: 18px; animation-duration: 407ms;margin: 0 5px; }
+
+.bar:nth-child(28)  { height: 2px; animation-duration: 474ms;margin: 0 5px; }
+.bar:nth-child(29)  { height: 10px; animation-duration: 433ms;margin: 0 5px; }
+.bar:nth-child(30)  { height: 18px; animation-duration: 407ms;margin: 0 5px; }
+
+
+.bar:nth-child(31)  { height: 2px; animation-duration: 474ms;margin: 0 5px; }
+.bar:nth-child(32)  { height: 10px; animation-duration: 433ms;margin: 0 5px; }
+.bar:nth-child(33)  { height: 18px; animation-duration: 407ms;margin: 0 5px; }
+.bar:nth-child(34)  { height: 26px; animation-duration: 458ms;margin: 0 5px; }
+.bar:nth-child(35)  { height: 30px; animation-duration: 400ms;margin: 0 5px; }
+.bar:nth-child(36)  { height: 32px; animation-duration: 427ms;margin: 0 5px; }
+.bar:nth-child(37)  { height: 34px; animation-duration: 441ms;margin: 0 5px; }
+.bar:nth-child(38)  { height: 36px; animation-duration: 419ms;margin: 0 5px; }
+.bar:nth-child(39)  { height: 40px; animation-duration: 487ms;margin: 0 5px; }
+
+.bar:nth-child(40) { height: 46px; animation-duration: 442ms;margin: 0 5px; }
+.bar:nth-child(41)  { height: 2px; animation-duration: 474ms;margin: 0 5px; }
+.bar:nth-child(42)  { height: 10px; animation-duration: 433ms;margin: 0 5px; }
+.bar:nth-child(43)  { height: 18px; animation-duration: 407ms;margin: 0 5px; }
+.bar:nth-child(44)  { height: 26px; animation-duration: 458ms;margin: 0 5px; }
+.bar:nth-child(45)  { height: 30px; animation-duration: 400ms;margin: 0 5px; }
+.bar:nth-child(46)  { height: 32px; animation-duration: 427ms;margin: 0 5px; }
+.bar:nth-child(47)  { height: 34px; animation-duration: 441ms;margin: 0 5px; }
+.bar:nth-child(48)  { height: 36px; animation-duration: 419ms;margin: 0 5px; }
+.bar:nth-child(49)  { height: 40px; animation-duration: 487ms;margin: 0 5px; }
+
+
+.bar:nth-child(50) { height: 46px; animation-duration: 442ms; }
+.bar:nth-child(51)  { height: 2px; animation-duration: 474ms; }
+.bar:nth-child(52)  { height: 10px; animation-duration: 433ms; }
+.bar:nth-child(53)  { height: 18px; animation-duration: 407ms; }
+.bar:nth-child(54)  { height: 26px; animation-duration: 458ms; }
+.bar:nth-child(55)  { height: 30px; animation-duration: 400ms; }
+.bar:nth-child(56)  { height: 32px; animation-duration: 427ms; }
+.bar:nth-child(57)  { height: 34px; animation-duration: 441ms; }
+.bar:nth-child(58)  { height: 36px; animation-duration: 419ms; }
+.bar:nth-child(59)  { height: 40px; animation-duration: 487ms; }
+
+
+.bar:nth-child(60) { height: 46px; animation-duration: 442ms; }
+.bar:nth-child(61)  { height: 2px; animation-duration: 474ms; }
+.bar:nth-child(62)  { height: 10px; animation-duration: 433ms; }
+.bar:nth-child(63)  { height: 18px; animation-duration: 407ms; }
+.bar:nth-child(64)  { height: 26px; animation-duration: 458ms; }
+.bar:nth-child(65)  { height: 30px; animation-duration: 400ms; }
+.bar:nth-child(66)  { height: 32px; animation-duration: 427ms; }
+.bar:nth-child(67)  { height: 34px; animation-duration: 441ms; }
+.bar:nth-child(68)  { height: 36px; animation-duration: 419ms; }
+.bar:nth-child(69)  { height: 40px; animation-duration: 487ms; }
+
+
+.bar:nth-child(70) { height: 46px; animation-duration: 442ms; }
+.bar:nth-child(71)  { height: 2px; animation-duration: 474ms; }
+.bar:nth-child(72)  { height: 10px; animation-duration: 433ms; }
+.bar:nth-child(73)  { height: 18px; animation-duration: 407ms; }
+.bar:nth-child(74)  { height: 26px; animation-duration: 458ms; }
+.bar:nth-child(75)  { height: 30px; animation-duration: 400ms; }
+.bar:nth-child(76)  { height: 32px; animation-duration: 427ms; }
+.bar:nth-child(77)  { height: 34px; animation-duration: 441ms; }
+.bar:nth-child(78)  { height: 36px; animation-duration: 419ms; }
+.bar:nth-child(79)  { height: 40px; animation-duration: 487ms; }
+
+
+.bar:nth-child(80) { height: 46px; animation-duration: 442ms; }
+.bar:nth-child(81)  { height: 2px; animation-duration: 474ms; }
+.bar:nth-child(82)  { height: 10px; animation-duration: 433ms; }
+.bar:nth-child(83)  { height: 18px; animation-duration: 407ms; }
+.bar:nth-child(84)  { height: 26px; animation-duration: 458ms; }
+.bar:nth-child(85)  { height: 30px; animation-duration: 400ms; }
+.bar:nth-child(86)  { height: 32px; animation-duration: 427ms; }
+.bar:nth-child(87)  { height: 34px; animation-duration: 441ms; }
+.bar:nth-child(88)  { height: 36px; animation-duration: 419ms; }
+.bar:nth-child(89)  { height: 40px; animation-duration: 487ms; }
+
+
+
+.bar:nth-child(90) { height: 46px; animation-duration: 442ms; }
+
+
+
+
+
+
+
+
+.left_headphone_img{
+  background-image: url('../../../../src/assets/images/left_headphone.png');
+}
