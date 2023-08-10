@@ -1,6 +1,6 @@
 
 import { Layout } from 'antd';
-import { SideNav } from '../../components';
+import { Player, SideNav } from '../../components';
 import { Outlet } from 'react-router-dom';
 
 export function Main(){
@@ -16,7 +16,8 @@ export function Main(){
            <Outlet />
         </Content>
       </Layout>
-      <Footer>Footer</Footer>
+      <Player/>
+      {/* <Footer>Footer</Footer> */}
     </Layout>
         </>
     )

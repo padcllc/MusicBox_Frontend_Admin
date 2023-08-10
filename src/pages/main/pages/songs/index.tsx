@@ -146,7 +146,17 @@ export function Songs() {
                                 <img src={up} />
                             </button>
                         </div>
-                        <div className='headphone_content'>
+                        <div className="animation">
+                                <div className='sound-icon'>
+                                    <div className='sound-wave'>
+
+                                        {[...Array(50)].map((x, i) =>
+                                            <div className='bar' key={i}></div>
+                                        )}
+                                    </div>
+                                </div>
+                                </div>
+                        {/* <div className='headphone_content'>
                             <img src={left_headphone} />
                             <div className="animation">
                                 <div className='sound-icon'>
@@ -160,7 +170,7 @@ export function Songs() {
 
                             </div>
                             <img src={right_headphone} />
-                        </div>
+                        </div> */}
 
                     </div>
                 </div>

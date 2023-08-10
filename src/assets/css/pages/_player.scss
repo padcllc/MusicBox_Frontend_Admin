@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&family=Manrope:wght@300&display=swap');
+
+.player {
+    height: 112px;
+    padding: 0 !important;
+    background: rgba(219, 182, 130, 1);
+    width: 100%;
+    display: flex;
+
+    .player_content {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        align-items: center;
+        padding: 24px 30px;
+        width: 100%;
+
+        .song_info {
+            display: flex;
+
+            .song_img {
+                width: 64px;
+                height: 64px;
+                border-radius: 12px;
+
+            }
+
+            .song_title_info {
+                margin-left: 15px;
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                text-align: start;
+
+                .song_name {
+                    font-family: 'Manrope';
+                    font-size: 18px;
+                    font-weight: 600;
+                    line-height: 25px;
+                    color: rgba(255, 255, 255, 1);
+                    margin-bottom: 8px;
+                }
+
+                .songer {
+                    font-family: 'Manrope';
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 19px;
+                    color: rgba(255, 255, 255, 1);
+
+                }
+            }
+
+            .like {
+                width: 24px;
+                height: 24px;
+                opacity: 0.7200000286102295px;
+                border: none;
+                background: none;
+                cursor: pointer;
+                outline: none;
+                margin: 15px;
+            }
+        }
+
+        .play_content,
+        .low_contet {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+
+            img {
+                cursor: pointer;
+            }
+
+            .previous_img,
+            .next_img {
+                margin: 0 24px;
+            }
+        }
+
+        .low_contet {
+            .sound_time {
+                font-family: 'Manrope';
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 22px;
+                color: rgba(255, 255, 255, 1);
+                margin-right: 20px;
+
+            }
+            .slider{
+                width: 100px;
+                margin: 0 30px 0 12px;
+            }
+        }
+    }
+}
+.ant-slider-track{
+    background-color: white !important;
+}
+.ant-slider-handle{
+    display: none !important;
+}
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-slider .ant-slider-rail{
+    background-color: rgba(77, 77, 77, 1) !important;
+}
