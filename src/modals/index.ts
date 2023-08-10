@@ -1,1 +1,1 @@
-export {AddSong} from './addsong';
+export {AddSong} from './addSong';

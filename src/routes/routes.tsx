@@ -7,7 +7,7 @@ import { MainRoutes } from "./mainRoutes";
 
 
 export function Routes() {
-  const access_token = 'sdd';
+  const access_token = null;
   useEffect(() => {});
   return (
     <>
