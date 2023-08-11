@@ -159,3 +159,30 @@ line-height: 22px;
 letter-spacing: 0em;
 color: rgba(219, 182, 130, 1);
 }
+
+
+
+.ant-form-item-explain-error{
+    color: #ff4d4f;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 5px 0;
+    width: 300px;
+}
+
+
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-spin{
+    color: white;
+}
+
+.error_message{
+    font-size: 18px !important;
+    font-weight: 400;
+    line-height: 17px;
+    font-family: "Inter";
+    display: flex;
+    justify-content: center;
+}

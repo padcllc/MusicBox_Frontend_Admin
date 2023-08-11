@@ -1,9 +1,11 @@
+import { Checkbox, Form, Input } from 'antd';
+
 import left_side_img from '../../../assets/images/auth_img.png';
 import disk from '../../../assets/images/disk.png';
 
-import { Checkbox, Form, Input } from 'antd';
 
 export function Login() {
+
 
     const onFinish = (values: any) => {
         console.log('Success:', values);
