@@ -193,11 +193,25 @@
 
 .show-map {
   display: block;
+  animation: fade-in 0.7s ease forwards;
 }
 
 .hidden-map {
   display: none !important;
 }
+
+
+  @keyframes fade-in {
+    from {
+
+      transform: translateX(-100%); /* Optional: Add a slight vertical animation */
+    }
+    to {
+      transform: translatX(0);
+    }
+  
+  }
+
 
 .containerStyle__google__map {
   width: 610px;
