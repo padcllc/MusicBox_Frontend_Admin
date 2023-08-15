@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import {Auth, Login, Registration} from '../pages/index';
+import { Auth, Login, Registration} from '../pages/index';
 
 export function AuthRoutes() {
   return <>
-          <BrowserRouter>
+         <BrowserRouter>
             <Routes>
             <Route path="/" element={<Auth/>}>
                     <Route path="/" element={<Navigate to="/login" />} />
@@ -13,7 +13,5 @@ export function AuthRoutes() {
                 <Route path='*' element={<Navigate to="/login" />} />
             </Routes>
         </BrowserRouter>
-  
-  
   </>;
 }

@@ -1,37 +1,38 @@
-export interface IUserRegistrationData {
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    confirmPassword?:string;
+export interface IOrganizationRegistrationFormData {
+  name: string,
+  email: string,
+  password: string,
+  confirmPassword: string;
+  address:string;
+  phone:string;
+  openTime:string;
+  closeTime:string;
 }
 
-export interface IUserRegistrationState{
-    status: string;
-    error: string | null;
-    accessToken:string,
-    refreshToken:string,
-}
 
-export interface IUserRegistrationResponseData{
-    accessToken:string;
-    refreshToken:string;
-}
 
-export interface IUserRegistrationResponse{
-    data:IUserRegistrationResponseData;
-    statusCode:number;
-    statusName:string;
-}
-
-export interface IUserRegistrationctionFulfilled {
-    payload: {
-      accessToken: string;
-      refreshToken: string;
-    };
-  };
-
-  export interface IUserRegistrationctionRejected{
-    payload:string;
+export interface IOrganizationRegistrationData {
+  name: string,
+  email: string,
+  password: string,
+  phone:string;
+  openTime:string;
+  closeTime:string;
+  address: {
+    addressName: string,
+    latitude: number,
+    longitude: number,
   }
-  
+}
+
+export interface IOrganizationRegistrationState {
+  status: string;
+  error: string | null;
+}
+
+export interface IOrganizationRegistrationResponse {
+  accessToken: string;
+  refreshToken: string;
+  statusCode: number;
+  statusName: string;
+}

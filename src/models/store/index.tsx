@@ -1,7 +1,9 @@
-import { IUserRegistrationState } from "../registration";
+import { IOrganizationLoginState } from "../login";
+import { IOrganizationRegistrationState } from "../registration";
 
 
 export interface IGeneralState {
-        userRegistration: IUserRegistrationState;
+        organizationRegistration: IOrganizationRegistrationState;
+        organizationLogin:IOrganizationLoginState;
   
 }

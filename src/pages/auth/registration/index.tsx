@@ -1,53 +1,76 @@
 import { useState, useEffect } from 'react';
-import { GoogleMap, Marker } from '@react-google-maps/api';
 import { Form, Input } from 'antd';
 
 
 import disk from '../../../assets/images/disk.png';
 import address from '../../../assets/icons/adress.svg';
 import close from '../../../assets/icons/close.svg';
-import { IUserRegistrationData } from '../../../models';
+import { IOrganizationRegistrationData, IOrganizationRegistrationFormData } from '../../../models';
 import { useDispatch, useSelector } from 'react-redux';
-import { increamentUserRegistration, userRegistrationErrorSelector, userRegistrationStatusSelector } from './slice/registration';
-import { Loading } from '../../../components';
+import {
+    increamentOrganizationRegistration,
+    organizationRegistrationErrorSelector,
+    organizationRegistrationStatusSelector
+}
+    from './slice/registration';
+import { InitMap, Loading } from '../../../components';
+
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { TimePicker } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { VALIDATION_PATTERNS } from '../../../validators';
+
+
+dayjs.extend(customParseFormat);
 
 export function Registration() {
 
+    const [form] = Form.useForm();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const center = {
-        address: '',
-        lat: 40.7998738714596,
-        lng: 43.857421875,
-    };
-
-    const [markers, setMarker] = useState<any>([]);
     const [openGoogleMap, setOpenGoogleMap] = useState<boolean>(false);
 
-    const userRegistrationStatus: string = useSelector(userRegistrationStatusSelector);
-    const userRegistrationError: string | null = useSelector(userRegistrationErrorSelector);
+    const [googleMapAddress, setGoogleMapAddress] = useState<string>();
+    const [googleMapLat, setgoogleMapLat] = useState<number>();
+    const [googleMapLng, setgoogleMapLng] = useState<number>();
+
+    const organizationRegistrationStatus: string = useSelector(organizationRegistrationStatusSelector);
+    const organizationRegistrationError: string | null = useSelector(organizationRegistrationErrorSelector);
 
 
 
-
-    const onFinish = (values: IUserRegistrationData) => {
+    const onFinish = (values: IOrganizationRegistrationFormData) => {
+        const formattedDateOpenTime = new Date(values.openTime).toLocaleString('en-GB', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+        });
+        const formattedDateCloseTime = new Date(values.closeTime).toLocaleString('en-GB', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+        });
         const { confirmPassword, ...dataToSend } = values;
-        dispatch(increamentUserRegistration(dataToSend) as any);
-    };
-
-    const onMapClick = (e: any) => {
-        setMarker((current: any) => [
-            //  ...current,
-            {
-                lat: e.latLng.lat(),
-                lng: e.latLng.lng()
+        const data: IOrganizationRegistrationData = {
+            name: values.name,
+            email: values.email,
+            password: values.password,
+            phone: values.phone,
+            openTime: formattedDateOpenTime,
+            closeTime: formattedDateCloseTime,
+            address: {
+                addressName: values.address,
+                latitude: Number(googleMapLat),
+                longitude: Number(googleMapLng)
             }
-        ]);
+        }
+        dispatch(increamentOrganizationRegistration(data) as any);
     };
-
 
     const validateTextOnly = (_: any, value: string) => {
-        const regex = /^[A-Za-z\s]+$/; // Regular expression to allow only alphabetic characters and spaces
+        const regex =VALIDATION_PATTERNS.TEXT;// Regular expression to allow only alphabetic characters and spaces
         if (!regex.test(value)) {
             return Promise.reject('Please enter only text');
         }
@@ -60,7 +83,7 @@ export function Registration() {
             return Promise.reject('');
         }
 
-        if (!/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/.test(value)) {
+        if (!VALIDATION_PATTERNS.PASSWORD.test(value)) {
             return Promise.reject(
                 `Password must contain at least one symbol, one number,and one uppercase letter`
             );
@@ -70,53 +93,121 @@ export function Registration() {
     };
 
 
+    const validatePhoneNumber = (rule: any, value: any, callback: Function) => {
+        // You can implement your own validation logic here
+        // For example, using a regular expression to validate international phone numbers
+        const phoneRegex = VALIDATION_PATTERNS.PHONE;
+
+        if (!value || phoneRegex.test(value)) {
+            callback(); // Validation passed
+        } else {
+            callback('Invalid phone number format'); // Validation failed
+        }
+    };
+
+
+    useEffect(() => {
+        form.setFieldsValue({
+            address: googleMapAddress
+        });
+    }, [googleMapAddress]);
+
+
+    useEffect(() => {
+        if (organizationRegistrationStatus === 'idle') {
+            navigate('/login');
+        }
+
+    }, [organizationRegistrationStatus]);
+
+
 
     return (
         <>
             <div className="main_page">
-
                 <div className='registration_right_sids right_side'>
 
                     <Form
+                        form={form}
                         name="basic"
-                        initialValues={{ remember: true }}
                         onFinish={onFinish}
                         autoComplete="off"
+                        initialValues={{ remember: true }}
                     >
-                        <p className='error_message'>{userRegistrationError}</p>
+                        <p className='error_message'>{organizationRegistrationError}</p>
                         <Form.Item
-                            name="firstName"
-                            rules={[{ required: true, message: '' }, {
-                                validator: validateTextOnly,
-                            }]}
-                        >
-                            <Input placeholder='First Name' className='input' />
-                        </Form.Item>
-                        <Form.Item
-                            name="lastName"
+                            name="name"
                             rules={[{ required: true, message: '' },
-                            { validator: validateTextOnly }]}
-                        >
-                            <Input placeholder='Last Name' className='input' />
-                        </Form.Item>
+                            {
+                                validator: validateTextOnly,
+                            },
+                            {
+                                max: 50,
+                                message: "Name should be less than 50 character",
+                            },
+                            {
+                                min: 3,
+                                message: "Name must be at least 8 characters!",
+                            },
 
-                        {/* <Form.Item
+
+                            ]}
+                        >
+                            <Input placeholder='Name' className='input' />
+                        </Form.Item>
+                        <div className='address_content'>
+                            <Form.Item
                                 name="address"
                                 rules={[{ required: true, message: '', }]}
                             >
                                 <Input placeholder='Address' className='input' />
-                                <img src={address} className='address_icon' onClick={(() => {
-                                    setOpenGoogleMap(true)
-                                })} />
-                            </Form.Item> */}
 
+                            </Form.Item>
+                            <img src={address} className='address_icon' onClick={(() => {
+                                setOpenGoogleMap(true)
+                            })} />
+                        </div>
+
+
+                        <Form.Item
+                            name="phone"
+                            rules={[{ required: true, message: '' },
+                            {
+                                validator: validatePhoneNumber,
+                            },
+
+                            ]}
+                        >
+                            <Input placeholder='Phone' className='input' />
+                        </Form.Item>
+
+
+
+                        <Form.Item
+                            name="openTime"
+                            rules={[{ required: true, message: '' }]}
+                        >
+                            <TimePicker format="HH:mm:ss" placeholder='Open Time' className='input' />
+                        </Form.Item>
+
+                        <Form.Item
+                            name="closeTime"
+                            rules={[{ required: true, message: '' }]}
+                        >
+                            <TimePicker format="HH:mm:ss" placeholder='Close Time' className='input' />
+                        </Form.Item>
 
                         <Form.Item
                             name="email"
                             rules={[{ required: true, message: '' }, {
                                 type: 'email',
                                 message: 'The input is not valid E-mail!',
-                            },]}
+                            },
+                            {
+                                max: 30,
+                                message: "Email should be less than 30 characters!",
+                            },
+                            ]}
                         >
                             <Input placeholder='Email' className='input' />
                         </Form.Item>
@@ -131,6 +222,10 @@ export function Registration() {
                                 {
                                     min: 8,
                                     message: 'Password must be at least 8 characters!',
+                                },
+                                {
+                                    max: 50,
+                                    message: "Password should be less than 50 characters!",
                                 },
                                 { validator: passwordValidator }
                             ]}
@@ -162,41 +257,34 @@ export function Registration() {
                             <button className='btn'>
                                 SIGN UP
                                 {
-                                    userRegistrationStatus === 'loading' ? <Loading /> : null
+                                    organizationRegistrationStatus === 'loading' ? <Loading /> : null
                                 }
 
                             </button>
                         </Form.Item>
                     </Form>
-                    {
-                        openGoogleMap ?
-                            <div className='google_map_content'>
-                                <GoogleMap
-                                    mapContainerClassName='containerStyle__google__map'
-                                    center={center}
-                                    zoom={10}
-                                    onClick={onMapClick}
-                                >
+                    <div className={'google_map_content ' + (openGoogleMap ? 'show-map' : 'hidden-map')}>
+                        <InitMap
+                            sendGoogleMapAddressInformation={(address: string) => {
+                                setGoogleMapAddress(address);
+                            }}
 
-                                    {markers.map((marker: any) => (
+                            sendLat={(lat: number) => {
+                                setgoogleMapLat(lat)
+                            }}
 
-                                        <Marker
-                                            position={{
-                                                lat: marker.lat,
-                                                lng: marker.lng
-                                            }} />
+                            sendLng={(lng: number) => {
+                                setgoogleMapLng(lng)
+                            }}
 
-                                    ))}
 
-                                </GoogleMap>
-                                <div className="close_content" onClick={(() => {
-                                    setOpenGoogleMap(false)
-                                })}>
-                                    <img src={close} />
-                                </div>
-                            </div> : null
-                    }
-
+                        />
+                        <div className="close_content" onClick={(() => {
+                            setOpenGoogleMap(false)
+                        })}>
+                            <img src={close} />
+                        </div>
+                    </div>
                 </div>
 
                 <div className='registration_left_content'>
@@ -214,10 +302,8 @@ export function Registration() {
 
                         </div>
                     </div>
-
                     <div className="registration_left_sids">
                         <div className='registration_left_sids_description'>
-
                             <p className='title'>MusicBox</p>
                             <p className='description'>Duis tellus aenean id tellus eu ut sit magna magna. At ornare iaculis feugiat nullam morbi ut interdum. </p>
                         </div>

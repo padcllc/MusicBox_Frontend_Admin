@@ -191,6 +191,14 @@
 
 }
 
+.show-map {
+  display: block;
+}
+
+.hidden-map {
+  display: none !important;
+}
+
 .containerStyle__google__map {
   width: 610px;
   height: 100%;
@@ -201,8 +209,16 @@
   height: 65px;
   background: rgba(255, 255, 255, 1);
   cursor: pointer;
-display: flex;
-align-items: center;
-text-align: center;
-justify-content: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.google_map_content {
+  display: flex;
+}
+
+.address_content {
+  position: relative;
 }

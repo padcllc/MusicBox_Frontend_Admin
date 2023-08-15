@@ -1,5 +1,5 @@
-import {  useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import admin from '../../assets/sidenavicons/admin.svg';
 import music from '../../assets/sidenavicons/music.svg';
@@ -24,15 +24,13 @@ interface LinkItem {
 };
 export function SideNav() {
     const location = useLocation();
-
-
-
+    const navigate = useNavigate();
 
     const [linkItem, setLinkItem] = useState<LinkItem[]>([
-        { name: 'Admin', icon: admin, activeIcon: active_admin, navigate: '/admin' },
+        { name: 'Admin', icon: admin, activeIcon: active_admin, navigate: '/admin'},
         { name: 'Songs', icon: music, activeIcon: active_music, navigate: '/songs' },
-        { name: 'Restaurants', icon: restaurant, activeIcon: active_restaurant, navigate: '/restaurants' },
-        { name: 'Users', icon: user, activeIcon: active_user, navigate: '/users' },
+        { name: 'Restaurants', icon: restaurant, activeIcon: active_restaurant, navigate: '/restaurants'},
+        { name: 'Users', icon: user, activeIcon: active_user, navigate: '/users'},
         { name: 'Log Out', icon: logout, activeIcon: active_logout, navigate: '/login' },
     ]);
 
@@ -54,7 +52,7 @@ export function SideNav() {
                                         .filter(Boolean)
                                         .join(" ")
                                 }>
-                                    <img className="icon" src={location.pathname === element?.navigate ? element.activeIcon : element?.icon}/>
+                                    <img className="icon" src={location.pathname === element?.navigate ? element.activeIcon : element?.icon} />
                                     <span className="nav__text">{element?.name}</span>
                                 </NavLink>
                             </li>

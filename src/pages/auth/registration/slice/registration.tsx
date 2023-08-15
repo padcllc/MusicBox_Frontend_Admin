@@ -1,59 +1,56 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { 
     IGeneralState, 
-    IUserRegistrationData, 
-    IUserRegistrationResponse, 
-    IUserRegistrationState, 
-    IUserRegistrationctionFulfilled,
+    IOrganizationRegistrationData, 
+    IOrganizationRegistrationResponse, 
+    IOrganizationRegistrationState, 
 } 
     from "../../../../models";
 
-import { UserRegistration } from '../../../../services/api';
+import { OrganizationRegistration } from '../../../../services/api';
 import { AxiosResponse } from "axios";
 
-const initialUserRegistrationState: IUserRegistrationState = {
+const initialOrganizationRegistrationState: IOrganizationRegistrationState = {
     status: '',
     error: null,
-    accessToken: '',
-    refreshToken: '',
 };
 
-export const increamentUserRegistration = createAsyncThunk(
-    'user/registration',
-    async (userData: IUserRegistrationData, { fulfillWithValue, rejectWithValue }) => {
+
+
+export const increamentOrganizationRegistration = createAsyncThunk(
+    'organization/registration',
+    async (organizationData: IOrganizationRegistrationData, { fulfillWithValue, rejectWithValue }) => {
         try {
-            const response: AxiosResponse<IUserRegistrationResponse> = await UserRegistration(userData);
-            return fulfillWithValue(response.data.data)
+            const response: AxiosResponse<IOrganizationRegistrationResponse> = await OrganizationRegistration(organizationData);
+            return fulfillWithValue(response.data);
         }
         catch (error: any) {
-            return rejectWithValue(error.response.data.message);
+            return rejectWithValue(error.response.data.errors[0].message);
         }
     }
 );
 
 
-export const userRegistrationSlice = createSlice({
-    name: 'user-registration',
-    initialState: initialUserRegistrationState,
+
+export const organizationRegistrationSlice = createSlice({
+    name: 'organization-registration',
+    initialState: initialOrganizationRegistrationState,
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(
-            increamentUserRegistration.pending, (state: IUserRegistrationState) => {
+            increamentOrganizationRegistration.pending, (state: IOrganizationRegistrationState) => {
                 state.status = 'loading';
             }
         );
         builder.addCase(
-            increamentUserRegistration.fulfilled, (state: IUserRegistrationState, action: IUserRegistrationctionFulfilled) => {
-                state.status = 'idle';
-                state.accessToken = action.payload.accessToken;
-                state.refreshToken = action.payload.refreshToken;
-                localStorage.setItem("refreshToken", action.payload.refreshToken);
-                localStorage.setItem("accessToken", action.payload.accessToken);
+            increamentOrganizationRegistration.fulfilled,
+            (state: IOrganizationRegistrationState) => {
+              state.status = "idle";
             }
+          );
 
-        );
         builder.addCase(
-            increamentUserRegistration.rejected, (state: IUserRegistrationState,action:any) => {
+            increamentOrganizationRegistration.rejected, (state: IOrganizationRegistrationState,action:any) => {
                 state.status = 'error';
                 state.error = action.payload;
             }
@@ -62,9 +59,10 @@ export const userRegistrationSlice = createSlice({
 
 });
 
-export const userRegistrationStatusSelector = (state: IGeneralState) => state.userRegistration.status;
-export const userRegistrationErrorSelector = (state: IGeneralState) => state.userRegistration.error;
+
+export const organizationRegistrationStatusSelector = (state: IGeneralState) => state.organizationRegistration.status;
+export const organizationRegistrationErrorSelector = (state: IGeneralState) => state.organizationRegistration.error;
 
 
-export default userRegistrationSlice.reducer;
+export default organizationRegistrationSlice.reducer;
 

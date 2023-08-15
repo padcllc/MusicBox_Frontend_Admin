@@ -1,8 +1,12 @@
 import { api } from "../services/base";
-import { IUserRegistrationData } from "../models";
+import { IOrganizationRegistrationData } from "../models";
 
 
 
-export const UserRegistration = (body:IUserRegistrationData) => {
-    return api.post('auth/user/register',body);
+export const OrganizationRegistration = (body:IOrganizationRegistrationData) => {
+    return api.post('auth/organization/register',body);
 };
+
+export const OrganizatiolLogin = (body:any) =>{
+return api.post('auth/organization/login',body);
+}

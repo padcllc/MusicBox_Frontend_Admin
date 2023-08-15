@@ -1,17 +1,20 @@
-import { useEffect} from "react";
+import React, { useEffect} from "react";
 
-import { AuthRoutes } from "./authRoutes";
+import { useSelector } from "react-redux";
+
 import { MainRoutes } from "./mainRoutes";
-
-
+import { AuthRoutes } from "./authRoutes";
+import { accessTokenSelector } from "../pages/auth/login/slice/login";
 
 
 export function Routes() {
-  const access_token = null;
-  useEffect(() => {});
+
+  const accessToken = useSelector(accessTokenSelector);
+  useEffect(() => {
+  },[accessToken]);
   return (
     <>
-      <div>{access_token ? <MainRoutes /> : <AuthRoutes />}</div>
+      <div>{accessToken ? <MainRoutes /> : <AuthRoutes />}</div>
     </>
   );
 }

@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import  userRegistrationSlice from "./pages/auth/registration/slice/registration";
+import organizationRegistrationSlice from "./pages/auth/registration/slice/registration";
+import organizationLoginSlice from "./pages/auth/login/slice/login";
+
 
 export const store = configureStore({
     reducer: {
-        userRegistration:userRegistrationSlice
+        organizationRegistration: organizationRegistrationSlice,
+        organizationLogin: organizationLoginSlice
     }
 });
