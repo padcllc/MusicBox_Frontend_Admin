@@ -8,7 +8,6 @@ export interface IGoogleMapProps {
 
  export function  InitMap({sendGoogleMapAddressInformation,sendLat,sendLng}:IGoogleMapProps){
 
-
         useEffect(() => {
             let map: google.maps.Map;
             let geocoder: google.maps.Geocoder;
@@ -16,7 +15,7 @@ export interface IGoogleMapProps {
     
             const initialize = () => {
                 map = new window.google.maps.Map(document.getElementById('map')  as HTMLElement, {
-                    center: { lat: 37.7749, lng: -122.4194 },
+                    center: { lat:40.7998738714596, lng:43.857421875},
                     zoom: 8
                 });
     
