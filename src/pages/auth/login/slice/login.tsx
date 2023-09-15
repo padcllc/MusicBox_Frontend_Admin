@@ -40,6 +40,7 @@ export const organizationLoginSlice = createSlice({
         builder.addCase(
             increamentOrganizationLoginAsync.fulfilled,
             (state: IOrganizationLoginState, action:any) => {
+              console.log(state,'state')
               state.status = "idle";
               state.accessToken = action.payload.accessToken;
               state.refreshToken = action.payload.refreshToken;

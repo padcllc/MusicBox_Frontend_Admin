@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { Main } from "../pages/index";
-import { Songs, Restaurats, Users } from "../pages/main/pages";
+import { Songs, Restaurats, Users, Admin } from "../pages/main/pages";
 
 export function MainRoutes() {
   return (
@@ -13,6 +13,7 @@ export function MainRoutes() {
             <Route path='/songs' element={<Songs />} />
             <Route path='/restaurants' element={<Restaurats />} />
             <Route path='/users' element={<Users />} />
+            <Route path='/admins' element={<Admin />} />
           </Route>
           <Route path="*" element={<Navigate to="/songs" />} />
         </Routes>

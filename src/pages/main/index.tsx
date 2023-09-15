@@ -17,7 +17,6 @@ export function Main(){
         </Content>
       </Layout>
       <Player/>
-      {/* <Footer>Footer</Footer> */}
     </Layout>
         </>
     )

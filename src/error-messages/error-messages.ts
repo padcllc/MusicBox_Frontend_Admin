@@ -4,4 +4,8 @@ export const ERROR_MESSAGES: { [key: string]: string } = {
     "err_address_matches": "Address should have valid format",
     "err_phone_is_phone_number": "Phone number should have valid format",
     "err_organization_email_already_exists": "Such an organization already exists",
+    "err_url_is_url":"URL should have valid format",
+    "err_startsecond_is_number":"Start second should have been just a number",
+    "err_endsecond_is_number":"End second should have been just a number",
+    "err_genre_not_exists":"Genre is required"
 }
