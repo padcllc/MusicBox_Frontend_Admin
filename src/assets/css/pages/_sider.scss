@@ -7,7 +7,8 @@
 }
 
 .layout{
-    height: calc(100vh - 112px);
+    min-height: calc(100vh - 112px);
+    // height: calc(100vh - 112px);
 }
 
 .ant-layout-sider-children {

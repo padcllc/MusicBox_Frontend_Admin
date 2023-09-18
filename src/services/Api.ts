@@ -16,29 +16,32 @@ export const OrganizatiolLogin = (body: any) => {
 }
 
 
-export const GetRestaurants = () => {
+export const GetRestaurants = (search:string) => {
     return api.get<IRestaurantResponse>('organizations', {
         params: {
             offset: 0,
-            limit: 10000
+            limit: 10000,
+            search
         }
     })
 };
 
-export const GetUsers = () => {
+export const GetUsers = (search:string) => {
     return api.get<IUserResponse>('users', {
         params: {
             offset: 0,
-            limit: 10000
+            limit: 10000,
+            search
         }
     })
 };
 
-export const GetSongs = () => {
+export const GetSongs = (search:string) => {
     return api.get<ISongsResponse>('songs', {
         params: {
             offset: 0,
-            limit: 5
+            limit: 10000,
+            search
         }
     })
 };

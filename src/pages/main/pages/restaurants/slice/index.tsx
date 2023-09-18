@@ -13,9 +13,9 @@ const initialReataurantState: IRestaurantState = {
 
 export const increamentRestautantsAsync = createAsyncThunk(
     "get/restaurants",
-    async (_, { fulfillWithValue, rejectWithValue }) => {
+    async (search:string, { fulfillWithValue, rejectWithValue }) => {
         try {
-            const response: AxiosResponse<IRestaurantResponse> = await GetRestaurants();
+            const response: AxiosResponse<IRestaurantResponse> = await GetRestaurants(search);
             return fulfillWithValue(response.data);
         } catch (error: any) {
             return rejectWithValue(error.response.data.errors[0].message);

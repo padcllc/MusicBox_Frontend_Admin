@@ -1,4 +1,6 @@
 import Table, { ColumnsType } from "antd/es/table";
+import { Pagination } from 'antd';
+
 import { SearchContent } from "../../../../components";
 
 import edite from '../../../../assets/icons/edit.svg';
@@ -62,14 +64,16 @@ export function Restaurats() {
 
 
    useEffect(() => {
-    dispatch(increamentRestautantsAsync() as any);
+      dispatch(increamentRestautantsAsync('') as any);
    }, []);
 
 
    return (
       <>
          <div>
-            <SearchContent />
+            <SearchContent sendSerchValue={((event: any) => {
+               dispatch(increamentRestautantsAsync(event) as any);
+            })} />
             <div className='page_content'>
                <p className='page_title'>Restaurants</p>
                <Table columns={columns} dataSource={restaurantData} key={restaurantData.length} />

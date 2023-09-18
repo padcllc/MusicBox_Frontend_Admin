@@ -82,13 +82,13 @@ export function Songs() {
     const addSongStatus = useSelector(addSongStatusSelector);
 
     useEffect(() => {
-        dispatch(increamentSongsAsync() as any);
+        dispatch(increamentSongsAsync('') as any);
     }, []);
 
 
     useEffect(()=>{
         if(addSongStatus === 'idle'){
-            dispatch(increamentSongsAsync() as any);
+            dispatch(increamentSongsAsync('') as any);
         }
 
     },[addSongStatus]);
@@ -99,7 +99,10 @@ export function Songs() {
                 <div className="header">
                     <div className='header_contet'>
                         <div className='search_input_content'>
-                            <input className='search_input' placeholder='Search' />
+                            <input className='search_input' placeholder='Search' 
+                            onChange={((event)=>{
+                                 dispatch(increamentSongsAsync(event.target.value) as any);
+                            })} />
                             <img src={search} className='search_icon' />
                         </div>
                         <img src={settings} className='setting_icon' />

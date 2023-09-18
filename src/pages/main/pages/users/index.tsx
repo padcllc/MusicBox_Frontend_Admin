@@ -50,14 +50,16 @@ export function Users() {
     const usersInformationData: IUserData[] = useSelector(usersInformation);
 
     useEffect(() => {
-        dispatch(increamentUsersAsync() as any);
+        dispatch(increamentUsersAsync('') as any);
     }, []);
 
 
     return (
         <>
             <div>
-                <SearchContent />
+                <SearchContent sendSerchValue={((event: string) => {
+                    dispatch(increamentUsersAsync(event) as any);
+                })} />
                 <div className='page_content'>
                     <p className='page_title'>Users</p>
                     <Table columns={columns} dataSource={usersInformationData} />

@@ -12,9 +12,9 @@ const initialSongsState: ISongsState = {
 
 export const increamentSongsAsync = createAsyncThunk(
     "get/songs",
-    async (_, { fulfillWithValue, rejectWithValue }) => {
+    async (search:string, { fulfillWithValue, rejectWithValue }) => {
         try {
-            const response: AxiosResponse<ISongsResponse> = await GetSongs();
+            const response: AxiosResponse<ISongsResponse> = await GetSongs(search);
             return fulfillWithValue(response.data);
         } catch (error: any) {
             return rejectWithValue(error.response.data.errors[0].message);
