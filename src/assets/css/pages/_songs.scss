@@ -64,6 +64,28 @@ color: rgba(0, 0, 0, 1);
   object-fit: contain;
 }
 
+.page_header_content{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  .bulk_btn{
+    background: #DBB682;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    color: #FFFFFF;
+    font-weight: 400;
+    padding: 16px 0;
+    width: 150px;
+    margin-right: 36px;
+  }
+}
+input[type="file"] {
+  display: none;
+}
+
 /////////////////////////////////////
 
 

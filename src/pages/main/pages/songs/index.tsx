@@ -1,6 +1,6 @@
 import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AddSong } from '../../../../modals';
 
 import add from '../../../../assets/icons/add.svg';
@@ -14,7 +14,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { increamentSongsAsync, songsInformationSelector } from './slice';
 import { ISongsData } from '../../../../models/songs';
 import { addSongStatusSelector } from '../../../../modals/addSong/slice';
+import { Balk } from '../../../../services/api';
 
+import { message, Space } from 'antd';
 
 
 const columns: ColumnsType<ISongsData> = [
@@ -27,7 +29,7 @@ const columns: ColumnsType<ISongsData> = [
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        render: (record,item:ISongsData) => ([
+        render: (record, item: ISongsData) => ([
             <div className='song_title_content'>
                 <img
                     className="table_image"
@@ -78,31 +80,41 @@ const columns: ColumnsType<ISongsData> = [
 export function Songs() {
     const dispatch = useDispatch();
     const [openAddSongModal, setOpenAddSongModal] = useState<boolean>(false);
-    const songsInformationData:ISongsData[] = useSelector(songsInformationSelector);
+    const songsInformationData: ISongsData[] = useSelector(songsInformationSelector);
     const addSongStatus = useSelector(addSongStatusSelector);
+    const [messageApi, contextHolder] = message.useMessage();
+
 
     useEffect(() => {
         dispatch(increamentSongsAsync('') as any);
     }, []);
 
 
-    useEffect(()=>{
-        if(addSongStatus === 'idle'){
+    useEffect(() => {
+        if (addSongStatus === 'idle') {
             dispatch(increamentSongsAsync('') as any);
         }
 
-    },[addSongStatus]);
+    }, [addSongStatus]);
+
+
+    const fileInputRef = useRef<any>(null);
+
+    const resetFileInput = () => {
+        fileInputRef.current.value = null; // Reset the file input
+    }
 
     return (
         <>
+            {contextHolder}
             <div className="song_content">
                 <div className="header">
                     <div className='header_contet'>
                         <div className='search_input_content'>
-                            <input className='search_input' placeholder='Search' 
-                            onChange={((event)=>{
-                                 dispatch(increamentSongsAsync(event.target.value) as any);
-                            })} />
+                            <input className='search_input' placeholder='Search'
+                                onChange={((event) => {
+                                    dispatch(increamentSongsAsync(event.target.value) as any);
+                                })} />
                             <img src={search} className='search_icon' />
                         </div>
                         <img src={settings} className='setting_icon' />
@@ -131,10 +143,35 @@ export function Songs() {
                     </div>
                 </div>
                 <div className='page_content'>
-                    <p className='page_title'>Songs</p>
+                    <div className='page_header_content'>
+                        <p className='page_title'>Songs</p>
+                        <label className="bulk_btn">
+                            <input className='bulk_btn' ref={fileInputRef}  type='file' accept=".xls, .xlsx" placeholder='Bulk Insert'
+                                onChange={((event: any) => {
+                                    let inputElement = event.target;
+                                    Balk(inputElement.files[0])
+                                        .then((result) => {
+                                            messageApi.open({
+                                                type: 'success',
+                                                content: 'File uploaded successfully',
+                                            });
+
+                                        })
+                                        .catch((error: any) => {
+                                            console.log(error)
+                                            messageApi.open({
+                                                type: 'error',
+                                                content: error.data.errors[0].validationErrkikuor,
+                                            });
+                                        })
+                                    resetFileInput();
+                                })} />
+                                Bulk Insert
+                        </label>
+
+                    </div>
                     <Table columns={columns} dataSource={songsInformationData} />
                 </div>
-
             </div >
             {
                 openAddSongModal ?
