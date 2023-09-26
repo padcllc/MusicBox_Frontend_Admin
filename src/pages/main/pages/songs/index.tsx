@@ -155,7 +155,7 @@ export function Songs() {
                                                 type: 'success',
                                                 content: 'File uploaded successfully',
                                             });
-
+                                            dispatch(increamentSongsAsync('') as any);
                                         })
                                         .catch((error: any) => {
                                             console.log(error)
