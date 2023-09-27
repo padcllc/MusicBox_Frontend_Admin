@@ -37,7 +37,9 @@ export function Admin(){
     return (
         <>
             <div>
-                <SearchContent />
+                <SearchContent sendSerchValue={function (event: string): void {
+            throw new Error("Function not implemented.");
+          } } />
                 <div className='page_content'>
                     <p className='page_title'>Admin</p>
                     <Table dataSource={dataSource} columns={columns} />

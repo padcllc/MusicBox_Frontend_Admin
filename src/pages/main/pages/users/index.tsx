@@ -34,7 +34,7 @@ const columns: ColumnsType<IUserData> = [
         title: ' ',
         dataIndex: 'edit',
         key: 'edit',
-        render: (record) => (
+        render: () => (
             <img
                 src={edite}
                 className="icon"
@@ -62,7 +62,7 @@ export function Users() {
                 })} />
                 <div className='page_content'>
                     <p className='page_title'>Users</p>
-                    <Table columns={columns} dataSource={usersInformationData} />
+                    <Table columns={columns} dataSource={usersInformationData} rowKey={(record) => record.id}/>
                 </div>
             </div>
         </>

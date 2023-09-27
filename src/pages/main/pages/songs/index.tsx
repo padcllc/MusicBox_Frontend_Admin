@@ -16,7 +16,7 @@ import { ISongsData } from '../../../../models/songs';
 import { addSongStatusSelector } from '../../../../modals/addSong/slice';
 import { Balk } from '../../../../services/api';
 
-import { message, Space } from 'antd';
+import { message } from 'antd';
 
 
 const columns: ColumnsType<ISongsData> = [
@@ -29,8 +29,9 @@ const columns: ColumnsType<ISongsData> = [
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        render: (record, item: ISongsData) => ([
-            <div className='song_title_content'>
+        render: (item: string) => {
+            return (
+                <div  className='song_title_content'>
                 <img
                     className="table_image"
                     onClick={() => { }}
@@ -38,14 +39,18 @@ const columns: ColumnsType<ISongsData> = [
                     src={song_item}
                 />
                 <div>
-                    <p className='song_title'>{item?.name}</p>
+                    <p className='song_title'>{item}</p>
                     {/* <p style={{ marginLeft: '8px' }}>Lana Del Rey</p> */}
                 </div>
 
             </div>
-        ]
-
-        ),
+    
+            )
+        } 
+        
+            
+           
+        
 
     },
     {
@@ -64,10 +69,10 @@ const columns: ColumnsType<ISongsData> = [
         key: 'endSecond',
     },
     {
-        title: ' ',
+        title: '',
         dataIndex: 'edit',
         key: 'edit',
-        render: (record) => (
+        render: () => (
             <img
                 src={edite}
                 className="icon"
@@ -158,10 +163,10 @@ export function Songs() {
                                             dispatch(increamentSongsAsync('') as any);
                                         })
                                         .catch((error: any) => {
-                                            console.log(error)
+                                            console.log(error,'fgfgd')
                                             messageApi.open({
                                                 type: 'error',
-                                                content: error.data.errors[0].validationErrkikuor,
+                                                content: 'sdsddd',
                                             });
                                         })
                                     resetFileInput();
@@ -170,7 +175,7 @@ export function Songs() {
                         </label>
 
                     </div>
-                    <Table columns={columns} dataSource={songsInformationData} />
+                    <Table  columns={columns} dataSource={songsInformationData} rowKey={(record) => record.id}/>
                 </div>
             </div >
             {

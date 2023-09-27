@@ -27,10 +27,11 @@ export function SideNav() {
     const navigate = useNavigate();
 
     const [linkItem, setLinkItem] = useState<LinkItem[]>([
-        { name: 'Admin', icon: admin, activeIcon: active_admin, navigate: '/admins'},
+        { name: 'Admin', icon: admin, activeIcon: active_admin, navigate: '/admins' },
         { name: 'Songs', icon: music, activeIcon: active_music, navigate: '/songs' },
-        { name: 'Restaurants', icon: restaurant, activeIcon: active_restaurant, navigate: '/restaurants'},
-        { name: 'Users', icon: user, activeIcon: active_user, navigate: '/users'},
+        { name: 'Genres', icon: music, activeIcon: active_music, navigate: '/genres' },
+        { name: 'Restaurants', icon: restaurant, activeIcon: active_restaurant, navigate: '/restaurants' },
+        { name: 'Users', icon: user, activeIcon: active_user, navigate: '/users' },
         { name: 'Log Out', icon: logout, activeIcon: active_logout, navigate: '/login' },
     ]);
 
@@ -43,14 +44,14 @@ export function SideNav() {
                 <ul className="nav__block">
                     {
                         linkItem.map((element: LinkItem, index: number) => {
-                            return <li className="nav__list" key={index + 1} onClick={(()=>{
-                                if(element?.name === 'Log Out'){
+                            return <li className="nav__list" key={index + 1} onClick={(() => {
+                                if (element?.name === 'Log Out') {
                                     localStorage.removeItem("accessToken");
                                     localStorage.removeItem("refreshToken");
                                     navigate('/login');
 
                                 }
-                                else{
+                                else {
                                     return false;
                                 }
                             })}>

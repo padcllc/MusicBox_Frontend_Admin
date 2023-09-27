@@ -45,7 +45,7 @@ const columns: ColumnsType<IRestaurantData> = [
       title: ' ',
       dataIndex: 'edit',
       key: 'edit',
-      render: (record) => (
+      render: () => (
          <img
             src={edite}
             className="icon"
@@ -76,7 +76,7 @@ export function Restaurats() {
             })} />
             <div className='page_content'>
                <p className='page_title'>Restaurants</p>
-               <Table columns={columns} dataSource={restaurantData} key={restaurantData.length} />
+               <Table columns={columns} dataSource={restaurantData} key={restaurantData.length} rowKey={(record) => record.id}/>
             </div>
          </div>
       </>

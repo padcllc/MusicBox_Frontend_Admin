@@ -8,8 +8,9 @@ export const ERROR_MESSAGES: { [key: string]: string } = {
     "err_startsecond_is_number": "Start second should have been just a number",
     "err_endsecond_is_number": "End second should have been just a number",
     "err_genre_not_exists": "Genre is required",
-    "isString": "Name must be a string",
-    "isURL": "URL must be a string",
-    "isNumber": "Start second and End second  must be a string",
-    "invalidGenre": "Genre should have valid format"
+    "err_is_string": "Name and URL must be a string",
+    "err_is_url": "URL must be a valid format",
+    "err_is_number": "Start second and End second  must be a string",
+    "err_invalid_genre": "Genre should have valid format",
+    "err_empty_sheet":"fields must be filled",
 }
