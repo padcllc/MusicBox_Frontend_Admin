@@ -59,14 +59,24 @@ export const GetGenre = () => {
 export const AddSong = (body: IAddSongData) => {
     return api.post<IAddSongResponse>('songs', body);
 
-}
+};
 
 export const Balk = (file:any) =>{
     var data = new FormData();
     data.append('file', file);
     return api.post<any>('songs/bulk',data);
-}
+};
 
 export const AddGenre = (body:IAddGenreData) =>{
     return api.post<IAddGenreResponse>('genre',body);
+};
+
+
+export const DeleteGenreItem = (id:number) =>{
+return api.delete(`genre/${id}`);
+};
+
+export const GetGenreById = (id:number) =>{
+    return api.get(`genre/${id}`);
 }
+

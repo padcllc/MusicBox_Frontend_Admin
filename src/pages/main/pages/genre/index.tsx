@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
 import { AddGenre, DeletedModal } from "../../../../modals";
 import { addGenretatusSelector } from "../../../../modals/addGenre/slice";
+import { DeleteGenreItem } from "../../../../services/api";
 
 
 
@@ -23,9 +24,15 @@ export function Genre() {
     const dispatch = useDispatch();
     const genreInformationData: IGenreData[] = useSelector(genreInformationSelector);
     const [isOpenGenreModal, setIsOpenGenreModal] = useState<boolean>(false);
+const [isOpenEditGenreModal,setIsOpenEditGenreModal] = useState<boolean>(false);
+
     const [deletedModalIsOpen, setDeletedModalIsOpen] = useState<boolean>(false);
 
     const addGenretatus = useSelector(addGenretatusSelector);
+
+    const [genreItem, setGenreItem] = useState<number | any>();
+
+    const [genreId,setGenreId] = useState<number | any>();
 
     const columns: ColumnsType<IGenreData> = [
         {
@@ -43,10 +50,14 @@ export function Genre() {
             title: 'Edit',
             dataIndex: 'edit',
             key: 'edit',
-            render: () => (
+            render: (_,item) => (
                 <img
                     src={edite}
                     className="icon"
+                    onClick={(() => {
+                        setIsOpenEditGenreModal(true);
+                        setGenreId(item?.id)
+                    })}
                 />
             ),
         },
@@ -54,10 +65,12 @@ export function Genre() {
             title: 'Delete',
             dataIndex: 'delete',
             key: 'delete',
-            render: () => (
+            render: (_, item) => (
                 <DeleteOutlined onClick={(() => {
                     setDeletedModalIsOpen(true)
-                })} />
+                    setGenreItem(item?.id)
+                })}
+                />
             ),
         }
     ];
@@ -94,8 +107,14 @@ export function Genre() {
                 <Table columns={columns} dataSource={genreInformationData} rowKey={(record) => record.id} />
                 <>
                     {
-                        isOpenGenreModal ? <AddGenre isOpenModal={((isOpen: boolean) => {
+                        isOpenGenreModal ? <AddGenre  isOpenModal={((isOpen: boolean) => {
                             setIsOpenGenreModal(isOpen);
+                        })} /> : null
+                    }
+
+{
+                        isOpenEditGenreModal ? <AddGenre genreId={genreId} isOpenModal={((isOpen: boolean) => {
+                            setIsOpenEditGenreModal(isOpen);
                         })} /> : null
                     }
                 </>
@@ -103,6 +122,16 @@ export function Genre() {
                     {
                         deletedModalIsOpen ? <DeletedModal text='genre' setDeletedModalIsOpen={((isOpen: boolean) => {
                             setDeletedModalIsOpen(isOpen)
+                            if (isOpen) {
+                                console.log(genreItem, 'genreItem')
+                                DeleteGenreItem(genreItem)
+                                    .then((result) => {
+                                        setDeletedModalIsOpen(false)
+                                        dispatch(increamentGenreAsync() as any);
+                                    })
+                                    .catch((error) => { })
+                            }
+
                         })} /> : null
                     }
                 </>

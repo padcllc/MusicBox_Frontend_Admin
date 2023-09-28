@@ -13,5 +13,6 @@ export const ERROR_MESSAGES: { [key: string]: string } = {
     "err_is_number": "Start second and End second  must be a string",
     "err_invalid_genre": "Genre should have valid format",
     "err_empty_sheet":"fields must be filled",
-    "err_name_is_not_empty":"Name is required"
+    "err_name_is_not_empty":"Name is required",
+    "err_genre_exists":"Genre cannot be duplicated"
 }
