@@ -3,7 +3,7 @@ import { IOrganizationRegistrationData } from "../models";
 import { IRestaurantResponse } from "../models/restaurants";
 import { IUserResponse } from "../models/users";
 import { IAddSongData, IAddSongResponse, ISongsResponse } from "../models/songs";
-import { IGenreResponse } from "../models/genre";
+import { IAddGenreData, IAddGenreResponse, IGenreResponse } from "../models/genre";
 
 
 
@@ -65,4 +65,8 @@ export const Balk = (file:any) =>{
     var data = new FormData();
     data.append('file', file);
     return api.post<any>('songs/bulk',data);
+}
+
+export const AddGenre = (body:IAddGenreData) =>{
+    return api.post<IAddGenreResponse>('genre',body);
 }

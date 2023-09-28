@@ -6,6 +6,7 @@ import usersSlice from "./pages/main/pages/users/slice";
 import songsSlice from "./pages/main/pages/songs/slice";
 import genreSlice from "./components/genre/slice";
 import addSongSlice from "./modals/addSong/slice";
+import addGenreSlice from "./modals/addGenre/slice";
 
 
 export const store = configureStore({
@@ -17,5 +18,6 @@ export const store = configureStore({
         songs: songsSlice,
         genre: genreSlice,
         addSongs: addSongSlice,
+        addGenre: addGenreSlice
     }
 });

@@ -187,3 +187,17 @@ color: rgba(219, 182, 130, 1);
     display: flex;
     justify-content: center;
 }
+
+.add_btn {
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    background: none;
+    border: 1px solid #530804;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

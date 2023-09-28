@@ -12,19 +12,7 @@
         width: 100%;
         justify-content: space-between;
     }
-    .add_btn {
-        width: 37px;
-        height: 37px;
-        border-radius: 50%;
-        background: none;
-        border: 1px solid #530804;
-        cursor: pointer;
-        outline: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
+
     .btn_content{
         display: flex;  
         align-items: center;
@@ -194,12 +182,6 @@ input[type="file"] {
 .bar:nth-child(57)  { height: 34px; animation-duration: 441ms; }
 .bar:nth-child(58)  { height: 36px; animation-duration: 419ms; }
 .bar:nth-child(59)  { height: 40px; animation-duration: 487ms; }
-
-
-
-
-
-
 
 
 
