@@ -3,7 +3,7 @@ import { IOrganizationRegistrationData } from "../models";
 import { IRestaurantResponse } from "../models/restaurants";
 import { IUserResponse } from "../models/users";
 import { IAddSongData, IAddSongResponse, ISongsResponse } from "../models/songs";
-import { IAddGenreData, IAddGenreResponse, IGenreResponse } from "../models/genre";
+import { IAddGenreData, IAddGenreResponse, IEditGenreData, IGenreResponse } from "../models/genre";
 
 
 
@@ -16,7 +16,7 @@ export const OrganizatiolLogin = (body: any) => {
 }
 
 
-export const GetRestaurants = (search:string) => {
+export const GetRestaurants = (search: string) => {
     return api.get<IRestaurantResponse>('organizations', {
         params: {
             offset: 0,
@@ -26,7 +26,7 @@ export const GetRestaurants = (search:string) => {
     })
 };
 
-export const GetUsers = (search:string) => {
+export const GetUsers = (search: string) => {
     return api.get<IUserResponse>('users', {
         params: {
             offset: 0,
@@ -36,7 +36,7 @@ export const GetUsers = (search:string) => {
     })
 };
 
-export const GetSongs = (search:string) => {
+export const GetSongs = (search: string) => {
     return api.get<ISongsResponse>('songs', {
         params: {
             offset: 0,
@@ -61,22 +61,26 @@ export const AddSong = (body: IAddSongData) => {
 
 };
 
-export const Balk = (file:any) =>{
+export const Balk = (file: any) => {
     var data = new FormData();
     data.append('file', file);
-    return api.post<any>('songs/bulk',data);
+    return api.post<any>('songs/bulk', data);
 };
 
-export const AddGenre = (body:IAddGenreData) =>{
-    return api.post<IAddGenreResponse>('genre',body);
+export const AddGenre = (body: IAddGenreData) => {
+    return api.post<IAddGenreResponse>('genre', body);
 };
 
 
-export const DeleteGenreItem = (id:number) =>{
-return api.delete(`genre/${id}`);
+export const DeleteGenreItem = (id: number) => {
+    return api.delete(`genre/${id}`);
 };
 
-export const GetGenreById = (id:number) =>{
+export const GetGenreById = (id: number) => {
     return api.get(`genre/${id}`);
+};
+
+export const EditGenre = (id: number, body: IEditGenreData) => {
+    return api.put(`genre/${id}`, body);
 }
 

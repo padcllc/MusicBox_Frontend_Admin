@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { addGenreErrorSelector, addGenretatusSelector, increamentAddGenreAsync, updateStatus } from "./slice";
 import { useEffect, useState } from "react";
 import { GetGenreById } from "../../services/api";
-import { IAddGenreData } from "../../models/genre";
+import { IAddGenreData, IEditGenreData } from "../../models/genre";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { editGenreErrorSelector, editGenretatusSelector, increamentEditGenreAsync, updateEditStatus } from "./slice/editGenreSlice";
 
 export interface IGenreProps {
     isOpenModal: Function;
@@ -20,15 +21,18 @@ export function AddGenre({ isOpenModal, genreId }: IGenreProps) {
 
     const dispatch = useDispatch();
 
-    const { register, handleSubmit, setValue, formState: { errors } } = useForm<IAddGenreData>();
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm<IAddGenreData | IEditGenreData>();
 
-    const addGenretatus = useSelector(addGenretatusSelector);
+    const addGenrestatus = useSelector(addGenretatusSelector);
     const addSongError = useSelector(addGenreErrorSelector);
+    const editGenreError = useSelector(editGenreErrorSelector);
+    const editGenretatus = useSelector(editGenretatusSelector);
 
 
     const onSubmit: SubmitHandler<IAddGenreData> = data => {
         if (genreId) {
             console.log('grel edit-i functione')
+            dispatch(increamentEditGenreAsync({ id: genreId, name: data.name }) as any);
         }
         else {
             dispatch(increamentAddGenreAsync(data) as any);
@@ -38,7 +42,14 @@ export function AddGenre({ isOpenModal, genreId }: IGenreProps) {
 
 
     useEffect(() => {
-        dispatch(updateStatus(""));
+        if (genreId) {
+            dispatch(updateEditStatus(""));
+        }
+        else {
+            dispatch(updateStatus(""));
+        }
+
+
 
         if (genreId) {
             GetGenreById(genreId)
@@ -57,12 +68,22 @@ export function AddGenre({ isOpenModal, genreId }: IGenreProps) {
 
     useEffect(() => {
 
-        if (addGenretatus === 'idle') {
+        if (addGenrestatus === 'idle') {
             isOpenModal(false);
             dispatch(updateStatus(""));
         }
 
-    }, [addGenretatus]);
+    }, [addGenrestatus]);
+
+
+    useEffect(() => {
+
+        if (editGenretatus === 'idle') {
+            isOpenModal(false);
+            dispatch(updateEditStatus(""));
+        }
+
+    }, [editGenretatus]);
 
     return (
         <>
@@ -74,7 +95,7 @@ export function AddGenre({ isOpenModal, genreId }: IGenreProps) {
                     }}>
                     <div className="add_genre_modal_contert">
                         <img src={disk} />
-                        <p className='error_message'>{addSongError}</p>
+                        <p className='error_message'>{genreId ? editGenreError : addSongError}</p>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <>
                                 <input className='input' placeholder="name" {...register("name", { required: true })} />
@@ -85,8 +106,14 @@ export function AddGenre({ isOpenModal, genreId }: IGenreProps) {
 
                                 Submit
                                 {
-                                    addGenretatus === 'loading' ? <Loading /> : null
-                                }</button>
+                                    !genreId && addGenrestatus === 'loading' ? <Loading /> : null
+                                }
+
+                                {
+                                    genreId && editGenretatus === 'loading' ? <Loading /> : null
+                                }
+
+                            </button>
                         </form>
 
 

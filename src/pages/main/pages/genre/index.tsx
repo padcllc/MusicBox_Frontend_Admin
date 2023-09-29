@@ -14,6 +14,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { AddGenre, DeletedModal } from "../../../../modals";
 import { addGenretatusSelector } from "../../../../modals/addGenre/slice";
 import { DeleteGenreItem } from "../../../../services/api";
+import { editGenretatusSelector } from "../../../../modals/addGenre/slice/editGenreSlice";
 
 
 
@@ -24,15 +25,17 @@ export function Genre() {
     const dispatch = useDispatch();
     const genreInformationData: IGenreData[] = useSelector(genreInformationSelector);
     const [isOpenGenreModal, setIsOpenGenreModal] = useState<boolean>(false);
-const [isOpenEditGenreModal,setIsOpenEditGenreModal] = useState<boolean>(false);
+    const [isOpenEditGenreModal, setIsOpenEditGenreModal] = useState<boolean>(false);
 
     const [deletedModalIsOpen, setDeletedModalIsOpen] = useState<boolean>(false);
 
     const addGenretatus = useSelector(addGenretatusSelector);
+    const editGenretatus = useSelector(editGenretatusSelector);
+
 
     const [genreItem, setGenreItem] = useState<number | any>();
 
-    const [genreId,setGenreId] = useState<number | any>();
+    const [genreId, setGenreId] = useState<number | any>();
 
     const columns: ColumnsType<IGenreData> = [
         {
@@ -50,7 +53,7 @@ const [isOpenEditGenreModal,setIsOpenEditGenreModal] = useState<boolean>(false);
             title: 'Edit',
             dataIndex: 'edit',
             key: 'edit',
-            render: (_,item) => (
+            render: (_, item) => (
                 <img
                     src={edite}
                     className="icon"
@@ -75,10 +78,6 @@ const [isOpenEditGenreModal,setIsOpenEditGenreModal] = useState<boolean>(false);
         }
     ];
 
-
-
-
-
     useEffect(() => {
         dispatch(increamentGenreAsync() as any);
     }, []);
@@ -89,6 +88,14 @@ const [isOpenEditGenreModal,setIsOpenEditGenreModal] = useState<boolean>(false);
             dispatch(increamentGenreAsync() as any);
         }
     }, [addGenretatus]);
+
+
+
+    useEffect(() => {
+        if (editGenretatus === 'idle') {
+            dispatch(increamentGenreAsync() as any);
+        }
+    }, [editGenretatus]);
 
     return (
         <>
@@ -107,12 +114,12 @@ const [isOpenEditGenreModal,setIsOpenEditGenreModal] = useState<boolean>(false);
                 <Table columns={columns} dataSource={genreInformationData} rowKey={(record) => record.id} />
                 <>
                     {
-                        isOpenGenreModal ? <AddGenre  isOpenModal={((isOpen: boolean) => {
+                        isOpenGenreModal ? <AddGenre isOpenModal={((isOpen: boolean) => {
                             setIsOpenGenreModal(isOpen);
                         })} /> : null
                     }
 
-{
+                    {
                         isOpenEditGenreModal ? <AddGenre genreId={genreId} isOpenModal={((isOpen: boolean) => {
                             setIsOpenEditGenreModal(isOpen);
                         })} /> : null

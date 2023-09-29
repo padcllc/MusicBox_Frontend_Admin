@@ -25,7 +25,25 @@ export interface IAddGenreData{
     name:string;
 }
 
+export interface IEditGenreData{
+    name:string;
+}
+
+
 export interface IAddGenreResponse{
+    statusCode: number,
+    statusName: string,
+    data: {
+        success:boolean,
+    }
+}
+
+export interface IEditGenreState{
+    status:string,
+    error:string |  null,
+}
+
+export interface IEditGenreResponse{
     statusCode: number,
     statusName: string,
     data: {
