@@ -130,7 +130,6 @@ export function Genre() {
                         deletedModalIsOpen ? <DeletedModal text='genre' setDeletedModalIsOpen={((isOpen: boolean) => {
                             setDeletedModalIsOpen(isOpen)
                             if (isOpen) {
-                                console.log(genreItem, 'genreItem')
                                 DeleteGenreItem(genreItem)
                                     .then((result) => {
                                         setDeletedModalIsOpen(false)

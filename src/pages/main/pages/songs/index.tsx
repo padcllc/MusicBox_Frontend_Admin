@@ -17,72 +17,80 @@ import { addSongStatusSelector } from '../../../../modals/addSong/slice';
 import { Balk } from '../../../../services/api';
 
 import { message } from 'antd';
+import { Player } from '../../../../components';
 
 
-const columns: ColumnsType<ISongsData> = [
-    {
-        title: '#',
-        dataIndex: 'id',
-        key: 'id',
-    },
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        render: (item: string) => {
-            return (
-                <div  className='song_title_content'>
-                <img
-                    className="table_image"
-                    onClick={() => { }}
-                    crossOrigin="anonymous"
-                    src={song_item}
-                />
-                <div>
-                    <p className='song_title'>{item}</p>
-                    {/* <p style={{ marginLeft: '8px' }}>Lana Del Rey</p> */}
-                </div>
-
-            </div>
-    
-            )
-        } 
-        
-            
-           
-        
-
-    },
-    {
-        title: 'Url',
-        dataIndex: 'url',
-        key: 'url',
-    },
-    {
-        title: 'Start Second',
-        dataIndex: 'startSecond',
-        key: 'startSecond',
-    },
-    {
-        title: 'End Second',
-        dataIndex: 'endSecond',
-        key: 'endSecond',
-    },
-    {
-        title: '',
-        dataIndex: 'edit',
-        key: 'edit',
-        render: () => (
-            <img
-                src={edite}
-                className="icon"
-            />
-        ),
-    }
-];
 
 
 export function Songs() {
+
+    const [songItem,setSongItem] = useState<ISongsData | undefined>();
+
+    const columns: ColumnsType<ISongsData> = [
+        {
+            title: '#',
+            dataIndex: 'id',
+            key: 'id',
+        },
+        {
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name',
+            render: (item: string) => {
+                return (
+                    <div  className='song_title_content'>
+                    <img
+                        className="table_image"
+                        onClick={() => { }}
+                        crossOrigin="anonymous"
+                        src={song_item}
+                    />
+                    <div>
+                        <p className='song_title'>{item}</p>
+                        {/* <p style={{ marginLeft: '8px' }}>Lana Del Rey</p> */}
+                    </div>
+    
+                </div>
+        
+                )
+            } 
+        },
+        {
+            title: 'Url',
+            dataIndex: 'url',
+            key: 'url',
+        },
+        {
+            title: 'Start Second',
+            dataIndex: 'startSecond',
+            key: 'startSecond',
+        },
+        {
+            title: 'End Second',
+            dataIndex: 'endSecond',
+            key: 'endSecond',
+        },
+        {
+            title: '',
+            dataIndex: 'edit',
+            key: 'edit',
+            render: (_,item:ISongsData) => (
+                <img
+                    src={edite}
+                    className="icon"
+                    onClick={(()=>{
+                        setSongItem(item)
+                    })}
+                />
+            ),
+        }
+    ];
+    
+
+
+
+
+
     const dispatch = useDispatch();
     const [openAddSongModal, setOpenAddSongModal] = useState<boolean>(false);
     const songsInformationData: ISongsData[] = useSelector(songsInformationSelector);
@@ -163,7 +171,6 @@ export function Songs() {
                                             dispatch(increamentSongsAsync('') as any);
                                         })
                                         .catch((error: any) => {
-                                            console.log(error,'fgfgd')
                                             messageApi.open({
                                                 type: 'error',
                                                 content: 'sdsddd',
@@ -177,6 +184,7 @@ export function Songs() {
                     </div>
                     <Table  columns={columns} dataSource={songsInformationData} rowKey={(record) => record.id}/>
                 </div>
+                <Player songItem={songItem as ISongsData}/>
             </div >
             {
                 openAddSongModal ?

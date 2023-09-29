@@ -16,7 +16,7 @@ export function Main(){
            <Outlet />
         </Content>
       </Layout>
-      <Player/>
+      {/* <Player/> */}
     </Layout>
         </>
     )

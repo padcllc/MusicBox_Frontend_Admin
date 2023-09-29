@@ -16,7 +16,6 @@ export const increamentUsersAsync = createAsyncThunk(
     async (search:string, { fulfillWithValue, rejectWithValue }) => {
         try {
             const response: AxiosResponse<IUserResponse> = await GetUsers(search);
-            console.log(response)
             return fulfillWithValue(response.data);
         } catch (error: any) {
             return rejectWithValue(error.response.data.errors[0].message);

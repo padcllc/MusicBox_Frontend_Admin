@@ -20,7 +20,6 @@ export const increamentAddGenreAsync = createAsyncThunk(
             const response: AxiosResponse<IAddGenreResponse> = await AddGenre(genreData);
             return fulfillWithValue(response.data);
         } catch (error: any) {
-            console.log(error)
             return rejectWithValue(error.response.data.errors[0].message);
         }
     }

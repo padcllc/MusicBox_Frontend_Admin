@@ -31,7 +31,6 @@ export function AddGenre({ isOpenModal, genreId }: IGenreProps) {
 
     const onSubmit: SubmitHandler<IAddGenreData> = data => {
         if (genreId) {
-            console.log('grel edit-i functione')
             dispatch(increamentEditGenreAsync({ id: genreId, name: data.name }) as any);
         }
         else {
@@ -55,7 +54,6 @@ export function AddGenre({ isOpenModal, genreId }: IGenreProps) {
             GetGenreById(genreId)
                 .then((result) => {
                     if (result) {
-                        console.log(result.data.name)
                         setValue('name', result.data.name ? result.data.name : '');
                     }
 

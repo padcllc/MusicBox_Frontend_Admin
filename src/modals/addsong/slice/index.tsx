@@ -18,7 +18,6 @@ export const increamentAddSongAsync = createAsyncThunk(
             const response: AxiosResponse<IAddSongResponse> = await AddSong(songData);
             return fulfillWithValue(response.data);
         } catch (error: any) {
-            console.log(error)
             return rejectWithValue(error.response.data.errors[0].message);
         }
     }
