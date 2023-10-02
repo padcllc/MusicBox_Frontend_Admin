@@ -25,6 +25,12 @@ import { Player } from '../../../../components';
 export function Songs() {
 
     const [songItem,setSongItem] = useState<ISongsData | undefined>();
+    const dispatch = useDispatch();
+    const [openAddSongModal, setOpenAddSongModal] = useState<boolean>(false);
+    const songsInformationData: ISongsData[] = useSelector(songsInformationSelector);
+    const addSongStatus = useSelector(addSongStatusSelector);
+    const [messageApi, contextHolder] = message.useMessage();
+
 
     const columns: ColumnsType<ISongsData> = [
         {
@@ -39,12 +45,12 @@ export function Songs() {
             render: (item: string) => {
                 return (
                     <div  className='song_title_content'>
-                    <img
+                    {/* <img
                         className="table_image"
                         onClick={() => { }}
                         crossOrigin="anonymous"
                         src={song_item}
-                    />
+                    /> */}
                     <div>
                         <p className='song_title'>{item}</p>
                         {/* <p style={{ marginLeft: '8px' }}>Lana Del Rey</p> */}
@@ -85,17 +91,8 @@ export function Songs() {
             ),
         }
     ];
-    
 
-
-
-
-
-    const dispatch = useDispatch();
-    const [openAddSongModal, setOpenAddSongModal] = useState<boolean>(false);
-    const songsInformationData: ISongsData[] = useSelector(songsInformationSelector);
-    const addSongStatus = useSelector(addSongStatusSelector);
-    const [messageApi, contextHolder] = message.useMessage();
+ 
 
 
     useEffect(() => {

@@ -17,6 +17,8 @@
 
         .song_info {
             display: flex;
+            text-align: center;
+            align-items: center;
 
             .song_img {
                 width: 64px;
@@ -97,6 +99,29 @@
         }
     }
 }
+
+.play_img_content{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+    background: white;
+    .play_img{
+font-size:30px;
+    }
+}
+
+.youtube_icon{
+    color: white;
+    cursor: pointer;
+    padding: 0 10px;
+    font-size: 25px;
+}
+
 .ant-slider-track{
     background-color: white !important;
 }
