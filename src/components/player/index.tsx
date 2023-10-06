@@ -7,7 +7,8 @@ import Play from '../../assets/icons/Play.svg';
 import next from '../../assets/icons/next.svg';
 import repeate from '../../assets/icons/repeate.svg';
 
-import volume from '../../assets/icons/volume.svg';
+import sound from '../../assets/icons/volume.svg';
+import soundNo from '../../assets/icons/soundNo.svg';
 import lirik from '../../assets/icons/lirik.svg';
 import { useEffect, useRef, useState } from 'react';
 
@@ -35,24 +36,26 @@ export interface IVideoInfoData {
 }
 
 export function Player({ songItem }: IPlayerProps) {
-    const [disabled, setDisabled] = useState(false);
     const [videoUrl, setVideoUrl] = useState('');
     const [videoId, setVideoId] = useState('');
     const [videoInfo, setVideoInfo] = useState<any>(null);
 
     const [player, setPlayer] = useState<any>(null);
-    const [pause, setPause] = useState<boolean>(false);
+    const [pause, setPause] = useState<boolean>(true);
     const [messageApi, contextHolder] = message.useMessage();
-    const [openYoutube,setOpenYoutube] =useState<boolean>(false);
+    const [openYoutube, setOpenYoutube] = useState<boolean>(false);
 
     const videoRef = useRef<any>(null);
 
+    const [isMuted, setIsMuted] = useState(false);
+    const [volume, setVolume] = useState<number>(50);
 
 
     const opts = {
         width: '100%',
+        with: '360',
         playerVars: {
-            autoplay: 0, // Set to 1 if you want the video to auto-play
+            autoplay: 1,
         },
     };
 
@@ -85,6 +88,7 @@ export function Player({ songItem }: IPlayerProps) {
                 .catch((error) => {
                     console.error('Error fetching video information', error);
                 });
+            // setPause(false)
         }
     }, [videoId]);
 
@@ -106,6 +110,7 @@ export function Player({ songItem }: IPlayerProps) {
 
     const onPlayerReady = (event: any) => { ///play video
         setPlayer(event.target);
+
     };
 
 
@@ -116,6 +121,29 @@ export function Player({ songItem }: IPlayerProps) {
         setPause(true);
     };
 
+
+    const toggleSound = () => {
+        const soundPlay = videoRef.current.getInternalPlayer();
+        if (isMuted) {
+            soundPlay.unMute();
+        } else {
+            soundPlay.mute();
+        }
+        setIsMuted(!isMuted);
+    };
+
+    const handleVolumeChange = (newVolume: number) => {
+        if (player) {
+            setVolume(newVolume); // Update the state with the new volume
+            player.setVolume(newVolume); // Set the volume on the player
+            if(newVolume === 0){
+                setIsMuted(true);
+            }
+            else if (newVolume > 0){
+                setIsMuted(false);
+            }
+        }
+    };
     return (
         <>
             <div>
@@ -155,24 +183,34 @@ export function Player({ songItem }: IPlayerProps) {
                                 </div>
                                 <div className='low_contet'>
                                     <p className='sound_time'>1:45 / 4:42</p>
-                                    <img src={volume} />
-                                    <Slider className="slider" defaultValue={30} disabled={disabled} />
+
+                                    <div onClick={toggleSound}>
+                                        {isMuted ? <p>ffg</p> : <img src={sound} />}
+                                    </div>
+                                    <input
+                                        className="slider"
+                                        type="range"
+                                        min="0"
+                                        max="100"
+                                        value={volume}
+                                        onChange={(e) => handleVolumeChange(Number(e.target.value))}
+                                    />
                                     <img src={lirik} onClick={handleCopyText} />
-                                    <YoutubeOutlined  className='youtube_icon' onClick={(()=>{
-                                        setOpenYoutube(!openYoutube)
-                                    })}/>
+                                    <YoutubeOutlined className='youtube_icon'
+                                        onClick={(() => {
+                                            setOpenYoutube(!openYoutube)
+                                        })} />
                                 </div>
                             </div>
-
                         </div>
                         <div>
-                        <YouTube videoId={videoId} opts={opts} onReady={onPlayerReady} ref={videoRef}    style={ {opacity: openYoutube ? '1' : '0' } } />
-                        </div>
 
-                        
+                            <YouTube videoId={videoId} opts={opts} onReady={onPlayerReady} ref={videoRef}
+                                style={{ display: openYoutube ? 'block' : 'none' }}
+                            />
+                        </div>
                     </>
                 )}
-
             </div>
 
         </>
