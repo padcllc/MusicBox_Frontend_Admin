@@ -132,6 +132,17 @@ export function Player({ songItem }: IPlayerProps) {
         setIsMuted(!isMuted);
     };
 
+
+    const soundOff = () =>{
+        if(volume === 0){
+            setVolume(50);
+        }
+        else{
+            return false;
+        }
+
+    }
+
     const handleVolumeChange = (newVolume: number) => {
         if (player) {
             setVolume(newVolume); // Update the state with the new volume
@@ -153,7 +164,7 @@ export function Player({ songItem }: IPlayerProps) {
                         <div className="player">
                             <div className="player_content">
                                 <div className="song_info">
-                                    <img src={videoInfo?.thumbnails?.default?.url} alt="Video Thumbnail" className="song_img" />
+                                    <img src={videoInfo?.thumbnails?.default?.url} alt="Video Thumbnail" className="song_img"/>
                                     <div className='song_title_info'>
                                         <p className='song_name'>{videoInfo?.title}</p>
                                     </div>
@@ -185,7 +196,7 @@ export function Player({ songItem }: IPlayerProps) {
                                     <p className='sound_time'>1:45 / 4:42</p>
 
                                     <div onClick={toggleSound}>
-                                        {isMuted ? <p>ffg</p> : <img src={sound} />}
+                                        {isMuted ? <p onClick={soundOff}>ffg</p> : <img src={sound} />}
                                     </div>
                                     <input
                                         className="slider"
