@@ -4,11 +4,10 @@ import like from '../../assets/icons/like.svg';
 import shuffle from '../../assets/icons/shuffle.svg';
 import previous from '../../assets/icons/previous.svg';
 import Play from '../../assets/icons/Play.svg';
-import next from '../../assets/icons/next.svg';
+import nextIcon from '../../assets/icons/next.svg';
 import repeate from '../../assets/icons/repeate.svg';
 
 import sound from '../../assets/icons/volume.svg';
-import soundNo from '../../assets/icons/soundNo.svg';
 import lirik from '../../assets/icons/lirik.svg';
 import { useEffect, useRef, useState } from 'react';
 
@@ -22,6 +21,7 @@ import { message } from 'antd';
 
 export interface IPlayerProps {
     songItem: ISongsData;
+    next:Function,
 }
 
 
@@ -35,7 +35,7 @@ export interface IVideoInfoData {
     descriptions: string;
 }
 
-export function Player({ songItem }: IPlayerProps) {
+export function Player({ songItem,next }: IPlayerProps) {
     const [videoUrl, setVideoUrl] = useState('');
     const [videoId, setVideoId] = useState('');
     const [videoInfo, setVideoInfo] = useState<any>(null);
@@ -189,7 +189,9 @@ export function Player({ songItem }: IPlayerProps) {
                                             </div>
 
                                     }
-                                    <img src={next} className='next_img' />
+                                    <img src={nextIcon} className='next_img' onClick={(()=>{
+                                         next({action:'next'});
+                                    })}/>
                                     <img src={repeate} onClick={restartVideo} />
                                 </div>
                                 <div className='low_contet'>

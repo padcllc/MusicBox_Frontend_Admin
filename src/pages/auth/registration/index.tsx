@@ -121,7 +121,6 @@ export function Registration() {
     }, [organizationRegistrationStatus]);
 
 
-
     return (
         <>
             <div className="main_page">

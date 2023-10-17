@@ -21,16 +21,28 @@ import { Player } from '../../../../components';
 
 
 
+export interface ActionProsps {
+    action: string;
+}
 
 export function Songs() {
 
-    const [songItem,setSongItem] = useState<ISongsData | undefined>();
+    const [songItem, setSongItem] = useState<ISongsData | undefined>();
     const dispatch = useDispatch();
     const [openAddSongModal, setOpenAddSongModal] = useState<boolean>(false);
     const songsInformationData: ISongsData[] = useSelector(songsInformationSelector);
     const addSongStatus = useSelector(addSongStatusSelector);
     const [messageApi, contextHolder] = message.useMessage();
+    const [nextMessage, setNextMessage] = useState<ActionProsps>();
+    const [selectedSongIndex, setSelectedSongIndex] = useState<number | undefined | any>(0);
 
+
+
+    useEffect(() => {
+         setSongItem(songsInformationData[selectedSongIndex+1]);
+        setSelectedSongIndex(selectedSongIndex+1);
+        console.log(songItem)
+    }, [nextMessage]);
 
     const columns: ColumnsType<ISongsData> = [
         {
@@ -44,22 +56,22 @@ export function Songs() {
             key: 'name',
             render: (item: string) => {
                 return (
-                    <div  className='song_title_content'>
-                    {/* <img
+                    <div className='song_title_content'>
+                        {/* <img
                         className="table_image"
                         onClick={() => { }}
                         crossOrigin="anonymous"
                         src={song_item}
                     /> */}
-                    <div>
-                        <p className='song_title'>{item}</p>
-                        {/* <p style={{ marginLeft: '8px' }}>Lana Del Rey</p> */}
+                        <div>
+                            <p className='song_title'>{item}</p>
+                            {/* <p style={{ marginLeft: '8px' }}>Lana Del Rey</p> */}
+                        </div>
+
                     </div>
-    
-                </div>
-        
+
                 )
-            } 
+            }
         },
         {
             title: 'Url',
@@ -80,19 +92,17 @@ export function Songs() {
             title: '',
             dataIndex: 'edit',
             key: 'edit',
-            render: (_,item:ISongsData) => (
+            render: (_, item: ISongsData) => (
                 <img
                     src={edite}
                     className="icon"
-                    onClick={(()=>{
+                    onClick={(() => {
                         setSongItem(item)
                     })}
                 />
             ),
         }
     ];
-
- 
 
 
     useEffect(() => {
@@ -156,7 +166,7 @@ export function Songs() {
                     <div className='page_header_content'>
                         <p className='page_title'>Songs</p>
                         <label className="bulk_btn">
-                            <input className='bulk_btn' ref={fileInputRef}  type='file' accept=".xls, .xlsx" placeholder='Bulk Insert'
+                            <input className='bulk_btn' ref={fileInputRef} type='file' accept=".xls, .xlsx" placeholder='Bulk Insert'
                                 onChange={((event: any) => {
                                     let inputElement = event.target;
                                     Balk(inputElement.files[0])
@@ -175,13 +185,15 @@ export function Songs() {
                                         })
                                     resetFileInput();
                                 })} />
-                                Bulk Insert
+                            Bulk Insert
                         </label>
 
                     </div>
-                    <Table  columns={columns} dataSource={songsInformationData} rowKey={(record) => record.id}/>
+                    <Table columns={columns} dataSource={songsInformationData} rowKey={(record) => record.id} />
                 </div>
-                <Player songItem={songItem as ISongsData}/>
+                <Player songItem={songItem as ISongsData} next={((event: ActionProsps) => {
+                    setNextMessage(event)
+                })} />
             </div >
             {
                 openAddSongModal ?
