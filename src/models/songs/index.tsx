@@ -44,3 +44,18 @@ export interface IAddSongResponse {
         success:boolean,
     }
 }
+
+
+/////export interface player 
+
+
+export interface ISongPlayerStatus{
+    action:string;
+}
+
+
+export interface ISongPlayerState{
+    songItem:ISongsData | any;
+    status:ISongPlayerStatus | any;
+    selector:string,
+}

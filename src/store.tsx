@@ -8,6 +8,8 @@ import genreSlice from "./components/genre/slice";
 import addSongSlice from "./modals/addSong/slice";
 import addGenreSlice from "./modals/addGenre/slice";
 import editGenreSlice from "./modals/addGenre/slice/editGenreSlice";
+import mainSongsSlice from "./pages/main/slice";
+import  playerSongsSlice  from "./components/player/slice";
 
 
 export const store = configureStore({
@@ -20,6 +22,8 @@ export const store = configureStore({
         genre: genreSlice,
         addSongs: addSongSlice,
         addGenre: addGenreSlice,
-        editGenre:editGenreSlice
+        editGenre: editGenreSlice,
+        mainSongs: mainSongsSlice,
+        playerSongs:playerSongsSlice
     }
 });

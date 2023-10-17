@@ -1,8 +1,9 @@
 import { IAddGenreState, IEditGenreState, IGenreState } from "../genre";
 import { IOrganizationLoginState } from "../login";
+import { IMainSongsState } from "../main";
 import { IOrganizationRegistrationState } from "../registration";
 import { IRestaurantState } from "../restaurants";
-import { IAddSongsState, ISongsState } from "../songs";
+import { IAddSongsState, ISongPlayerState, ISongsState } from "../songs";
 import { IUsersState } from "../users";
 
 
@@ -16,4 +17,6 @@ export interface IGeneralState {
         addSongs:IAddSongsState,
         addGenre:IAddGenreState,
         editGenre:IEditGenreState
+        mainSongs:IMainSongsState
+        playerSongs:ISongPlayerState
 }

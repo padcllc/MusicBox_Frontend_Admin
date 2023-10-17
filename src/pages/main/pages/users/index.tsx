@@ -62,7 +62,7 @@ export function Users() {
                 })} />
                 <div className='page_content'>
                     <p className='page_title'>Users</p>
-                    <Table columns={columns} dataSource={usersInformationData} rowKey={(record) => record.id}/>
+                    <Table columns={columns} dataSource={usersInformationData} rowKey={(record) => record.id}  pagination={{ defaultPageSize:9 }}/>
                 </div>
             </div>
         </>

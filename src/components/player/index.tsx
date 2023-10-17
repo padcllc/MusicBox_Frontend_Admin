@@ -12,17 +12,12 @@ import lirik from '../../assets/icons/lirik.svg';
 import { useEffect, useRef, useState } from 'react';
 
 import YouTube from 'react-youtube';
-import { ISongsData } from '../../models/songs';
 import axios from 'axios';
 import { CaretRightOutlined, YoutubeOutlined } from '@ant-design/icons';
 
 import { message } from 'antd';
-
-
-export interface IPlayerProps {
-    songItem: ISongsData;
-    next:Function,
-}
+import { useDispatch, useSelector } from 'react-redux';
+import { playerSongItemInformationSelector, updateStatus } from './slice';
 
 
 export interface IVideoInfoData {
@@ -35,7 +30,8 @@ export interface IVideoInfoData {
     descriptions: string;
 }
 
-export function Player({ songItem,next }: IPlayerProps) {
+export function Player() {
+    const dispatch = useDispatch();
     const [videoUrl, setVideoUrl] = useState('');
     const [videoId, setVideoId] = useState('');
     const [videoInfo, setVideoInfo] = useState<any>(null);
@@ -50,6 +46,8 @@ export function Player({ songItem,next }: IPlayerProps) {
     const [isMuted, setIsMuted] = useState(false);
     const [volume, setVolume] = useState<number>(50);
 
+    const playerSongItem = useSelector(playerSongItemInformationSelector);
+
 
     const opts = {
         width: '100%',
@@ -59,11 +57,13 @@ export function Player({ songItem,next }: IPlayerProps) {
         },
     };
 
+
     useEffect(() => {
-        if (songItem) {
-            setVideoUrl(songItem?.url);
+        if (playerSongItem) {
+            setVideoUrl(playerSongItem?.url);
         }
-    }, [songItem]);
+    }, [playerSongItem]);
+
 
     useEffect(() => { ///send url from props
         if (videoUrl) {
@@ -110,7 +110,6 @@ export function Player({ songItem,next }: IPlayerProps) {
 
     const onPlayerReady = (event: any) => { ///play video
         setPlayer(event.target);
-
     };
 
 
@@ -133,11 +132,11 @@ export function Player({ songItem,next }: IPlayerProps) {
     };
 
 
-    const soundOff = () =>{
-        if(volume === 0){
+    const soundOff = () => {
+        if (volume === 0) {
             setVolume(50);
         }
-        else{
+        else {
             return false;
         }
 
@@ -147,10 +146,10 @@ export function Player({ songItem,next }: IPlayerProps) {
         if (player) {
             setVolume(newVolume); // Update the state with the new volume
             player.setVolume(newVolume); // Set the volume on the player
-            if(newVolume === 0){
+            if (newVolume === 0) {
                 setIsMuted(true);
             }
-            else if (newVolume > 0){
+            else if (newVolume > 0) {
                 setIsMuted(false);
             }
         }
@@ -164,7 +163,7 @@ export function Player({ songItem,next }: IPlayerProps) {
                         <div className="player">
                             <div className="player_content">
                                 <div className="song_info">
-                                    <img src={videoInfo?.thumbnails?.default?.url} alt="Video Thumbnail" className="song_img"/>
+                                    <img src={videoInfo?.thumbnails?.default?.url} alt="Video Thumbnail" className="song_img" />
                                     <div className='song_title_info'>
                                         <p className='song_name'>{videoInfo?.title}</p>
                                     </div>
@@ -189,9 +188,11 @@ export function Player({ songItem,next }: IPlayerProps) {
                                             </div>
 
                                     }
-                                    <img src={nextIcon} className='next_img' onClick={(()=>{
-                                         next({action:'next'});
-                                    })}/>
+                                    <img src={nextIcon} className='next_img'
+                                    onClick={(()=>{
+                                      dispatch(updateStatus({action:'next'} as any));
+                                    })}
+                                    />
                                     <img src={repeate} onClick={restartVideo} />
                                 </div>
                                 <div className='low_contet'>

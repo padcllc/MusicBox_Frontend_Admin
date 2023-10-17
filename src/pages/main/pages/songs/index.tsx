@@ -9,7 +9,6 @@ import search from '../../../../assets/icons/search.svg';
 import settings from '../../../../assets/icons/settings.svg';
 import edite from '../../../../assets/icons/edit.svg';
 
-import song_item from '../../../../assets/images/song_item.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { increamentSongsAsync, songsInformationSelector } from './slice';
 import { ISongsData } from '../../../../models/songs';
@@ -17,7 +16,7 @@ import { addSongStatusSelector } from '../../../../modals/addSong/slice';
 import { Balk } from '../../../../services/api';
 
 import { message } from 'antd';
-import { Player } from '../../../../components';
+import { playSongItemSelectorInformationSelector, playSongItemStatusInformationSelector, sendSongItemData,updateSelector } from '../../../../components/player/slice';
 
 
 
@@ -27,22 +26,17 @@ export interface ActionProsps {
 
 export function Songs() {
 
-    const [songItem, setSongItem] = useState<ISongsData | undefined>();
     const dispatch = useDispatch();
     const [openAddSongModal, setOpenAddSongModal] = useState<boolean>(false);
     const songsInformationData: ISongsData[] = useSelector(songsInformationSelector);
     const addSongStatus = useSelector(addSongStatusSelector);
+    const playSongItemStatus = useSelector(playSongItemStatusInformationSelector);
+    const playSongItemSelector =useSelector(playSongItemSelectorInformationSelector);
+
     const [messageApi, contextHolder] = message.useMessage();
-    const [nextMessage, setNextMessage] = useState<ActionProsps>();
     const [selectedSongIndex, setSelectedSongIndex] = useState<number | undefined | any>(0);
+    const [songItem, setSongItem] = useState<ISongsData | undefined  | any>();
 
-
-
-    useEffect(() => {
-         setSongItem(songsInformationData[selectedSongIndex+1]);
-        setSelectedSongIndex(selectedSongIndex+1);
-        console.log(songItem)
-    }, [nextMessage]);
 
     const columns: ColumnsType<ISongsData> = [
         {
@@ -57,17 +51,9 @@ export function Songs() {
             render: (item: string) => {
                 return (
                     <div className='song_title_content'>
-                        {/* <img
-                        className="table_image"
-                        onClick={() => { }}
-                        crossOrigin="anonymous"
-                        src={song_item}
-                    /> */}
                         <div>
                             <p className='song_title'>{item}</p>
-                            {/* <p style={{ marginLeft: '8px' }}>Lana Del Rey</p> */}
                         </div>
-
                     </div>
 
                 )
@@ -92,12 +78,13 @@ export function Songs() {
             title: '',
             dataIndex: 'edit',
             key: 'edit',
-            render: (_, item: ISongsData) => (
+            render: (_, item: ISongsData | any) => (
                 <img
                     src={edite}
                     className="icon"
                     onClick={(() => {
-                        setSongItem(item)
+                        dispatch(sendSongItemData(item));
+                        dispatch(updateSelector('songContent' as any));
                     })}
                 />
             ),
@@ -108,6 +95,15 @@ export function Songs() {
     useEffect(() => {
         dispatch(increamentSongsAsync('') as any);
     }, []);
+
+
+    useEffect(()=>{
+        if(playSongItemStatus.action === 'next' && playSongItemSelector === 'songContent'){
+          setSongItem(songsInformationData[selectedSongIndex+1]);
+          setSelectedSongIndex(selectedSongIndex+1);
+          dispatch(sendSongItemData(songItem) as any);
+        }
+          },[playSongItemStatus]);
 
 
     useEffect(() => {
@@ -189,11 +185,8 @@ export function Songs() {
                         </label>
 
                     </div>
-                    <Table columns={columns} dataSource={songsInformationData} rowKey={(record) => record.id} />
+                    <Table columns={columns} dataSource={songsInformationData} rowKey={(record) => record.id} pagination={{ defaultPageSize: 5 }} />
                 </div>
-                <Player songItem={songItem as ISongsData} next={((event: ActionProsps) => {
-                    setNextMessage(event)
-                })} />
             </div >
             {
                 openAddSongModal ?

@@ -76,7 +76,7 @@ export function Restaurats() {
             })} />
             <div className='page_content'>
                <p className='page_title'>Restaurants</p>
-               <Table columns={columns} dataSource={restaurantData} key={restaurantData.length} rowKey={(record) => record.id}/>
+               <Table columns={columns} dataSource={restaurantData} key={restaurantData.length} rowKey={(record) => record.id}  pagination={{ defaultPageSize:9}}/>
             </div>
          </div>
       </>

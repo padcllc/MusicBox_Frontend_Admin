@@ -42,7 +42,7 @@ export function Admin(){
           } } />
                 <div className='page_content'>
                     <p className='page_title'>Admin</p>
-                    <Table dataSource={dataSource} columns={columns} />
+                    <Table dataSource={dataSource} columns={columns}  pagination={{ defaultPageSize:9 }}/>
                 </div>
             </div>
         </>

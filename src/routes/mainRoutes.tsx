@@ -9,7 +9,7 @@ export function MainRoutes() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />}>
-            <Route path="/" element={<Navigate to="/songs" />} />
+            <Route path="/" element={<Navigate to="/admins" />} />
             <Route path='/songs' element={<Songs />} />
             <Route path="/genres" element={<Genre />} />
             <Route path='/restaurants' element={<Restaurats />} />
