@@ -189,3 +189,10 @@ input[type="file"] {
 .left_headphone_img{
   background-image: url('../../../../src/assets/images/left_headphone.png');
 }
+
+
+.animation_content{
+  .sound-wave{
+    height: 0 !important;
+  }
+}

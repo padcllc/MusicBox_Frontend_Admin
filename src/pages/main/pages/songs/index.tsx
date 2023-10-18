@@ -16,13 +16,9 @@ import { addSongStatusSelector } from '../../../../modals/addSong/slice';
 import { Balk } from '../../../../services/api';
 
 import { message } from 'antd';
-import { playSongItemSelectorInformationSelector, playSongItemStatusInformationSelector, sendSongItemData,updateSelector } from '../../../../components/player/slice';
+import { playerSongItemInformationSelector, sendSongItemData } from '../../../../components/player/slice';
 
 
-
-export interface ActionProsps {
-    action: string;
-}
 
 export function Songs() {
 
@@ -30,12 +26,9 @@ export function Songs() {
     const [openAddSongModal, setOpenAddSongModal] = useState<boolean>(false);
     const songsInformationData: ISongsData[] = useSelector(songsInformationSelector);
     const addSongStatus = useSelector(addSongStatusSelector);
-    const playSongItemStatus = useSelector(playSongItemStatusInformationSelector);
-    const playSongItemSelector =useSelector(playSongItemSelectorInformationSelector);
-
     const [messageApi, contextHolder] = message.useMessage();
-    const [selectedSongIndex, setSelectedSongIndex] = useState<number | undefined | any>(0);
-    const [songItem, setSongItem] = useState<ISongsData | undefined  | any>();
+    const playerSongItem = useSelector(playerSongItemInformationSelector);///ex pahin nvagox erge
+
 
 
     const columns: ColumnsType<ISongsData> = [
@@ -74,19 +67,44 @@ export function Songs() {
             dataIndex: 'endSecond',
             key: 'endSecond',
         },
+
         {
             title: '',
             dataIndex: 'edit',
             key: 'edit',
             render: (_, item: ISongsData | any) => (
-                <img
-                    src={edite}
-                    className="icon"
-                    onClick={(() => {
-                        dispatch(sendSongItemData(item));
-                        dispatch(updateSelector('songContent' as any));
-                    })}
-                />
+                <div>
+                    <img
+                        src={edite}
+                        className="icon"
+                        onClick={(() => {
+                            dispatch(sendSongItemData(item));
+                        })}
+                    />
+                </div>
+
+            ),
+        },
+        {
+            title: '',
+            dataIndex: 'play',
+            key: 'play',
+            render: (_, item: ISongsData | any) => (
+                // <p>{playerSongItem?.id === item.id ? 'sda' : null}</p>
+                <>
+                    {playerSongItem?.id === item.id ?
+                        <div className="animation_content">
+                            <div className='sound-icon'>
+                                <div className='sound-wave'>
+
+                                    {[...Array(5)].map((x, i) =>
+                                        <div className='bar' key={i}></div>
+                                    )}
+                                </div>
+                            </div>
+                        </div> : null}
+                </>
+
             ),
         }
     ];
@@ -97,21 +115,13 @@ export function Songs() {
     }, []);
 
 
-    useEffect(()=>{
-        if(playSongItemStatus.action === 'next' && playSongItemSelector === 'songContent'){
-          setSongItem(songsInformationData[selectedSongIndex+1]);
-          setSelectedSongIndex(selectedSongIndex+1);
-          dispatch(sendSongItemData(songItem) as any);
-        }
-          },[playSongItemStatus]);
-
-
     useEffect(() => {
         if (addSongStatus === 'idle') {
             dispatch(increamentSongsAsync('') as any);
         }
 
     }, [addSongStatus]);
+
 
 
     const fileInputRef = useRef<any>(null);

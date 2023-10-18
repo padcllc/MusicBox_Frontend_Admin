@@ -57,5 +57,5 @@ export interface ISongPlayerStatus{
 export interface ISongPlayerState{
     songItem:ISongsData | any;
     status:ISongPlayerStatus | any;
-    selector:string,
+    selectedSongIndex:number;
 }

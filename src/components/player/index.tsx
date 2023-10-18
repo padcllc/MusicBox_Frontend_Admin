@@ -171,7 +171,9 @@ export function Player() {
                                 </div>
                                 <div className='play_content'>
                                     <img src={shuffle} />
-                                    <img src={previous} className='previous_img' />
+                                    <img src={previous} className='previous_img' onClick={(() => {
+                                        dispatch(updateStatus({ action: 'previous' } as any));
+                                    })} />
                                     {
                                         !pause ?
                                             <div className='play_img_content'>
@@ -189,9 +191,9 @@ export function Player() {
 
                                     }
                                     <img src={nextIcon} className='next_img'
-                                    onClick={(()=>{
-                                      dispatch(updateStatus({action:'next'} as any));
-                                    })}
+                                        onClick={(() => {
+                                            dispatch(updateStatus({ action: 'next' } as any));
+                                        })}
                                     />
                                     <img src={repeate} onClick={restartVideo} />
                                 </div>
@@ -218,7 +220,6 @@ export function Player() {
                             </div>
                         </div>
                         <div>
-
                             <YouTube videoId={videoId} opts={opts} onReady={onPlayerReady} ref={videoRef}
                                 style={{ display: openYoutube ? 'block' : 'none' }}
                             />
