@@ -8,6 +8,7 @@ import nextIcon from '../../assets/icons/next.svg';
 import repeate from '../../assets/icons/repeate.svg';
 
 import sound from '../../assets/icons/volume.svg';
+import soundoff from '../../assets/icons/sound_off.png';
 import lirik from '../../assets/icons/lirik.svg';
 import { useEffect, useRef, useState } from 'react';
 
@@ -18,6 +19,8 @@ import { CaretRightOutlined, YoutubeOutlined } from '@ant-design/icons';
 import { message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { playerSongItemInformationSelector, updateStatus, updatevideoIsPlaying } from './slice';
+
+let interval: any;
 
 
 export interface IVideoInfoData {
@@ -48,6 +51,8 @@ export function Player() {
 
     const playerSongItem = useSelector(playerSongItemInformationSelector);
 
+    const [duration, setDuration] = useState();
+    const [currentTime, setCurrentTime] = useState();
 
 
     const opts = {
@@ -58,6 +63,20 @@ export function Player() {
         },
     };
 
+    const formatTime = (time: any) => {
+        const hours = Math.floor(time / 3600);
+        const minutes = Math.floor((time % 3600) / 60);
+        const sec_num = Math.floor(time % 60);
+        const formattedTime = `${minutes.toString().padStart(1, '0')}:${sec_num.toString().padStart(2, '0')}`;
+        return formattedTime;
+    };
+
+    useEffect(() => {
+        if (player) {
+            setDuration(player.getDuration());
+        }
+
+    }, [player]);
 
     useEffect(() => {
         if (playerSongItem) {
@@ -76,6 +95,8 @@ export function Player() {
         }
 
     }, [videoUrl]);
+
+
 
     useEffect(() => { /////get youtube video information
         const apiKey = 'AIzaSyBZh9VXDvRtB-as5RTcovwJzwiPZbRhA2U';
@@ -160,6 +181,17 @@ export function Player() {
         if (playerState === 1) { ///Video is playing
             setIsPlaying(true);
             dispatch(updatevideoIsPlaying(true as any));
+            setDuration(player.getDuration());
+            if (interval) {
+                clearInterval(interval);
+            }
+            interval = setInterval(() => {
+                setCurrentTime(player.getCurrentTime());
+            }, 1000);
+
+            return () => {
+                clearInterval(interval);
+            }
         }
         else if (playerState === 2) { ///Video is stoped
             setIsPlaying(false);
@@ -169,8 +201,8 @@ export function Player() {
             setIsPlaying(false);
             dispatch(updatevideoIsPlaying(false as any));
         }
-    };
 
+    };
 
 
 
@@ -210,9 +242,6 @@ export function Player() {
                                             </div>
                                     }
 
-
-
-
                                     <img src={nextIcon} className='next_img'
                                         onClick={(() => {
                                             dispatch(updateStatus({ action: 'next' } as any));
@@ -221,10 +250,21 @@ export function Player() {
                                     <img src={repeate} onClick={restartVideo} />
                                 </div>
                                 <div className='low_contet'>
-                                    <p className='sound_time'>1:45 / 4:42</p>
+                                    <p className='sound_time'>
+                                        <>
+                                            {
+                                                currentTime ? <>{formatTime(currentTime)}</> : <>0:00</>
+                                            }
+                                            /
+                                            {
+                                                duration ? <>{formatTime(duration)}</> : <></>
+                                            }
+                                        </>
+
+                                    </p>
 
                                     <div onClick={toggleSound}>
-                                        {isMuted ? <p onClick={soundOff}>ffg</p> : <img src={sound} />}
+                                        {isMuted ? <p onClick={soundOff}><img src={soundoff} /></p> : <img src={sound} />}
                                     </div>
                                     <input
                                         className="slider"
