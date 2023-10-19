@@ -17,7 +17,7 @@ import { CaretRightOutlined, YoutubeOutlined } from '@ant-design/icons';
 
 import { message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { playerSongItemInformationSelector, updateStatus } from './slice';
+import { playerSongItemInformationSelector, updateStatus, updatevideoIsPlaying } from './slice';
 
 
 export interface IVideoInfoData {
@@ -35,11 +35,11 @@ export function Player() {
     const [videoUrl, setVideoUrl] = useState('');
     const [videoId, setVideoId] = useState('');
     const [videoInfo, setVideoInfo] = useState<any>(null);
+    const [isPlaying, setIsPlaying] = useState(false);
 
-    const [player, setPlayer] = useState<any>(null);
-    const [pause, setPause] = useState<boolean>(true);
+    const [player, setPlayer] = useState<any>();
     const [messageApi, contextHolder] = message.useMessage();
-    const [openYoutube, setOpenYoutube] = useState<boolean>(false);
+    const [openYoutube, setOpenYoutube] = useState<boolean>(true);
 
     const videoRef = useRef<any>(null);
 
@@ -47,6 +47,7 @@ export function Player() {
     const [volume, setVolume] = useState<number>(50);
 
     const playerSongItem = useSelector(playerSongItemInformationSelector);
+
 
 
     const opts = {
@@ -65,7 +66,7 @@ export function Player() {
     }, [playerSongItem]);
 
 
-    useEffect(() => { ///send url from props
+    useEffect(() => { ///send url from dispatch
         if (videoUrl) {
             const videoIdRegex = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?feature=player_embedded&v=))(.*?)(?=\?|&| #|$)/;
             const match = videoUrl.match(videoIdRegex);
@@ -87,8 +88,7 @@ export function Player() {
                 })
                 .catch((error) => {
                     console.error('Error fetching video information', error);
-                });
-            // setPause(false)
+                })
         }
     }, [videoId]);
 
@@ -117,7 +117,6 @@ export function Player() {
         const player = videoRef.current.getInternalPlayer();
         player.seekTo(0);
         player.playVideo();
-        setPause(true);
     };
 
 
@@ -154,6 +153,28 @@ export function Player() {
             }
         }
     };
+
+    const onStateChange = (event: any) => {
+        const playerState = event.data;
+        // Check for the YouTube player state
+        if (playerState === 1) { ///Video is playing
+            setIsPlaying(true);
+            dispatch(updatevideoIsPlaying(true as any));
+        }
+        else if (playerState === 2) { ///Video is stoped
+            setIsPlaying(false);
+            dispatch(updatevideoIsPlaying(false as any));
+        }
+        else if (playerState === 0) { ///Video has ended
+            setIsPlaying(false);
+            dispatch(updatevideoIsPlaying(false as any));
+        }
+    };
+
+
+
+
+
     return (
         <>
             <div>
@@ -174,22 +195,24 @@ export function Player() {
                                     <img src={previous} className='previous_img' onClick={(() => {
                                         dispatch(updateStatus({ action: 'previous' } as any));
                                     })} />
+
                                     {
-                                        !pause ?
+                                        !isPlaying ?
                                             <div className='play_img_content'>
                                                 <CaretRightOutlined className='play_img' onClick={(() => {
                                                     player.playVideo()
-                                                    setPause(true)
                                                 })} /> </div> :
                                             <div>
                                                 <img src={Play} onClick={(() => {
                                                     player.pauseVideo()
-                                                    setPause(false)
 
                                                 })} />
                                             </div>
-
                                     }
+
+
+
+
                                     <img src={nextIcon} className='next_img'
                                         onClick={(() => {
                                             dispatch(updateStatus({ action: 'next' } as any));
@@ -220,7 +243,12 @@ export function Player() {
                             </div>
                         </div>
                         <div>
-                            <YouTube videoId={videoId} opts={opts} onReady={onPlayerReady} ref={videoRef}
+                            <YouTube
+                                videoId={videoId}
+                                opts={opts}
+                                onReady={onPlayerReady}
+                                onStateChange={onStateChange}
+                                ref={videoRef}
                                 style={{ display: openYoutube ? 'block' : 'none' }}
                             />
                         </div>

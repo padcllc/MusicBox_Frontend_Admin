@@ -58,4 +58,5 @@ export interface ISongPlayerState{
     songItem:ISongsData | any;
     status:ISongPlayerStatus | any;
     selectedSongIndex:number;
+    videoIsPlaying:false,
 }

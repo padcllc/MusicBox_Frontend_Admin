@@ -16,7 +16,7 @@ import { addSongStatusSelector } from '../../../../modals/addSong/slice';
 import { Balk } from '../../../../services/api';
 
 import { message } from 'antd';
-import { playerSongItemInformationSelector, sendSongItemData } from '../../../../components/player/slice';
+import { playerSongItemInformationSelector, sendSongItemData, videoIsPlayingInformationSelector } from '../../../../components/player/slice';
 
 
 
@@ -24,11 +24,13 @@ export function Songs() {
 
     const dispatch = useDispatch();
     const [openAddSongModal, setOpenAddSongModal] = useState<boolean>(false);
+    const fileInputRef = useRef<any>(null);
+    const [messageApi, contextHolder] = message.useMessage();
+
     const songsInformationData: ISongsData[] = useSelector(songsInformationSelector);
     const addSongStatus = useSelector(addSongStatusSelector);
-    const [messageApi, contextHolder] = message.useMessage();
-    const playerSongItem = useSelector(playerSongItemInformationSelector);///ex pahin nvagox erge
-
+    const playerSongItem = useSelector(playerSongItemInformationSelector);///es pahin nvagox erge
+    const videoIsPlaying = useSelector(videoIsPlayingInformationSelector); /// vido play or not 
 
 
     const columns: ColumnsType<ISongsData> = [
@@ -41,11 +43,11 @@ export function Songs() {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
-            render: (item: string) => {
+            render: (_, item: ISongsData | any) => {
                 return (
                     <div className='song_title_content'>
                         <div>
-                            <p className='song_title'>{item}</p>
+                            <p className='song_title' style={{ color: playerSongItem?.id === item.id ? '#DBB682' : 'black' }} >{item?.name}</p>
                         </div>
                     </div>
 
@@ -90,7 +92,6 @@ export function Songs() {
             dataIndex: 'play',
             key: 'play',
             render: (_, item: ISongsData | any) => (
-                // <p>{playerSongItem?.id === item.id ? 'sda' : null}</p>
                 <>
                     {playerSongItem?.id === item.id ?
                         <div className="animation_content">
@@ -98,7 +99,7 @@ export function Songs() {
                                 <div className='sound-wave'>
 
                                     {[...Array(5)].map((x, i) =>
-                                        <div className='bar' key={i}></div>
+                                        <div className='bar' key={i} style={{ display: videoIsPlaying ? 'block' : 'none' }} ></div>
                                     )}
                                 </div>
                             </div>
@@ -122,9 +123,6 @@ export function Songs() {
 
     }, [addSongStatus]);
 
-
-
-    const fileInputRef = useRef<any>(null);
 
     const resetFileInput = () => {
         fileInputRef.current.value = null; // Reset the file input
@@ -161,7 +159,7 @@ export function Songs() {
                                 <div className='sound-wave'>
 
                                     {[...Array(50)].map((x, i) =>
-                                        <div className='bar' key={i}></div>
+                                        <div className='bar' key={i} style={{ display: videoIsPlaying ? 'block' : 'none' }}></div>
                                     )}
                                 </div>
                             </div>

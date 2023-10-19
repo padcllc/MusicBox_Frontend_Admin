@@ -5,7 +5,8 @@ import { IGeneralState } from "../../../models";
 const initialSongPlayerState: ISongPlayerState = {
     songItem: {},
     status: {},
-    selectedSongIndex: 0
+    selectedSongIndex: 0,
+    videoIsPlaying: false,
 }
 
 
@@ -21,16 +22,20 @@ export const playerSongsSlice = createSlice({
         },
         updateSelectedSongIndex: (state: ISongPlayerState, action: any) => {
             state.selectedSongIndex = action.payload;
+        },
+        updatevideoIsPlaying: (state: ISongPlayerState, action: any) => {
+            state.videoIsPlaying = action.payload;
         }
     },
 
 });
 
 
-export const { sendSongItemData, updateStatus, updateSelectedSongIndex } = playerSongsSlice.actions;
+export const { sendSongItemData, updateStatus, updateSelectedSongIndex, updatevideoIsPlaying } = playerSongsSlice.actions;
 
 export const playerSongItemInformationSelector = (state: IGeneralState) => state.playerSongs.songItem;
 export const playSongItemStatusInformationSelector = (state: IGeneralState) => state.playerSongs.status;
 export const selectedSongIndexInformationSelector = (state: IGeneralState) => state.playerSongs.selectedSongIndex;
+export const videoIsPlayingInformationSelector = (state: IGeneralState) => state.playerSongs.videoIsPlaying;
 
 export default playerSongsSlice.reducer;
