@@ -84,3 +84,9 @@ export const EditGenre = (id: number, body: IEditGenreData) => {
     return api.put(`genre/${id}`, body);
 }
 
+export const GetYoutubeVideo = (apiKey:string,videoId:string) =>{
+    return api.get(`https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&id=${videoId}&part=snippet`, 
+    {headers: {'non_auth':"true"}}
+    
+    );
+}

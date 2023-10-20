@@ -1,5 +1,3 @@
-import { Slider } from 'antd';
-
 import like from '../../assets/icons/like.svg';
 import shuffle from '../../assets/icons/shuffle.svg';
 import previous from '../../assets/icons/previous.svg';
@@ -12,31 +10,26 @@ import soundoff from '../../assets/icons/sound_off.png';
 import lirik from '../../assets/icons/lirik.svg';
 import { useEffect, useRef, useState } from 'react';
 
-import YouTube from 'react-youtube';
-import axios from 'axios';
+import YouTube, { YouTubePlayer } from 'react-youtube';
+
+
 import { CaretRightOutlined, YoutubeOutlined } from '@ant-design/icons';
 
 import { message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { playerSongItemInformationSelector, updateStatus, updatevideoIsPlaying } from './slice';
+import { increamentYoutubeAsync, youtubSongsDataSelector } from './slice/getYoutubeVideo';
 
-let interval: any;
+
+let interval: number;
 
 
-export interface IVideoInfoData {
-    title: string;
-    thumbnails: {
-        default: {
-            url: string;
-        }
-    }
-    descriptions: string;
-}
 
 export function Player() {
     const dispatch = useDispatch();
+    const apiKey:string = import.meta.env.VITE_YOUTUBE_API_KEY;
     const [videoUrl, setVideoUrl] = useState('');
-    const [videoId, setVideoId] = useState('');
+    const [videoId, setVideoId] = useState<string>('');
     const [videoInfo, setVideoInfo] = useState<any>(null);
     const [isPlaying, setIsPlaying] = useState(false);
 
@@ -54,6 +47,7 @@ export function Player() {
     const [duration, setDuration] = useState();
     const [currentTime, setCurrentTime] = useState();
 
+    const youtubSongsData = useSelector(youtubSongsDataSelector);
 
     const opts = {
         width: '100%',
@@ -63,7 +57,7 @@ export function Player() {
         },
     };
 
-    const formatTime = (time: any) => {
+    const formatTime = (time: number) => {
         const hours = Math.floor(time / 3600);
         const minutes = Math.floor((time % 3600) / 60);
         const sec_num = Math.floor(time % 60);
@@ -99,19 +93,18 @@ export function Player() {
 
 
     useEffect(() => { /////get youtube video information
-        const apiKey = 'AIzaSyBZh9VXDvRtB-as5RTcovwJzwiPZbRhA2U';
         if (videoId) {
-            axios
-                .get(`https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&id=${videoId}&part=snippet`)
-                .then((response) => {
-                    const video = response.data.items[0];
-                    setVideoInfo(video.snippet);
-                })
-                .catch((error) => {
-                    console.error('Error fetching video information', error);
-                })
+            dispatch(increamentYoutubeAsync({ apiKey, videoId }) as any);
         }
     }, [videoId]);
+
+
+    useEffect(() => {
+        if (youtubSongsData) {
+            setVideoInfo(youtubSongsData.snippet);
+        }
+    }, [youtubSongsData]);
+
 
     const handleCopyText = () => { ////copy link function 
         navigator.clipboard.writeText(videoUrl)
@@ -129,7 +122,7 @@ export function Player() {
             });
     };
 
-    const onPlayerReady = (event: any) => { ///play video
+    const onPlayerReady = (event: { target: YouTubePlayer }) => { ///play video
         setPlayer(event.target);
     };
 
@@ -175,17 +168,17 @@ export function Player() {
         }
     };
 
-    const onStateChange = (event: any) => {
+    const onStateChange = (event: YouTubePlayer) => {
         const playerState = event.data;
         // Check for the YouTube player state
         if (playerState === 1) { ///Video is playing
             setIsPlaying(true);
-            dispatch(updatevideoIsPlaying(true as any));
+            dispatch(updatevideoIsPlaying(true as boolean));
             setDuration(player.getDuration());
             if (interval) {
                 clearInterval(interval);
             }
-            interval = setInterval(() => {
+            interval = window.setInterval(() => {
                 setCurrentTime(player.getCurrentTime());
             }, 1000);
 
@@ -195,17 +188,14 @@ export function Player() {
         }
         else if (playerState === 2) { ///Video is stoped
             setIsPlaying(false);
-            dispatch(updatevideoIsPlaying(false as any));
+            dispatch(updatevideoIsPlaying(false as boolean));
         }
         else if (playerState === 0) { ///Video has ended
             setIsPlaying(false);
-            dispatch(updatevideoIsPlaying(false as any));
+            dispatch(updatevideoIsPlaying(false as boolean));
         }
 
     };
-
-
-
 
     return (
         <>
@@ -225,7 +215,7 @@ export function Player() {
                                 <div className='play_content'>
                                     <img src={shuffle} />
                                     <img src={previous} className='previous_img' onClick={(() => {
-                                        dispatch(updateStatus({ action: 'previous' } as any));
+                                        dispatch(updateStatus({ action: 'previous' }));
                                     })} />
 
                                     {
@@ -244,7 +234,7 @@ export function Player() {
 
                                     <img src={nextIcon} className='next_img'
                                         onClick={(() => {
-                                            dispatch(updateStatus({ action: 'next' } as any));
+                                            dispatch(updateStatus({ action: 'next' }));
                                         })}
                                     />
                                     <img src={repeate} onClick={restartVideo} />

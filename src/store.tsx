@@ -9,7 +9,8 @@ import addSongSlice from "./modals/addSong/slice";
 import addGenreSlice from "./modals/addGenre/slice";
 import editGenreSlice from "./modals/addGenre/slice/editGenreSlice";
 import mainSongsSlice from "./pages/main/slice";
-import  playerSongsSlice  from "./components/player/slice";
+import playerSongsSlice from "./components/player/slice";
+import youtubeSongsSlice from "./components/player/slice/getYoutubeVideo";
 
 
 export const store = configureStore({
@@ -24,6 +25,7 @@ export const store = configureStore({
         addGenre: addGenreSlice,
         editGenre: editGenreSlice,
         mainSongs: mainSongsSlice,
-        playerSongs:playerSongsSlice
+        playerSongs: playerSongsSlice,
+        youtubeSong: youtubeSongsSlice
     }
 });

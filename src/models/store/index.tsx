@@ -5,6 +5,7 @@ import { IOrganizationRegistrationState } from "../registration";
 import { IRestaurantState } from "../restaurants";
 import { IAddSongsState, ISongPlayerState, ISongsState } from "../songs";
 import { IUsersState } from "../users";
+import { IYoutubeSongState } from "../youtube";
 
 
 export interface IGeneralState {
@@ -18,5 +19,6 @@ export interface IGeneralState {
         addGenre:IAddGenreState,
         editGenre:IEditGenreState
         mainSongs:IMainSongsState
-        playerSongs:ISongPlayerState
+        playerSongs:ISongPlayerState,
+        youtubeSong:IYoutubeSongState
 }

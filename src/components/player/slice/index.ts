@@ -14,16 +14,16 @@ export const playerSongsSlice = createSlice({
     name: "player-song",
     initialState: initialSongPlayerState,
     reducers: {
-        sendSongItemData: (state: ISongPlayerState, action: any) => {
+        sendSongItemData: (state: ISongPlayerState, action) => {
             state.songItem = action.payload;
         },
-        updateStatus: (state: ISongPlayerState, action: any) => {
+        updateStatus: (state: ISongPlayerState, action) => {
             state.status = action.payload;
         },
-        updateSelectedSongIndex: (state: ISongPlayerState, action: any) => {
+        updateSelectedSongIndex: (state: ISongPlayerState, action) => {
             state.selectedSongIndex = action.payload;
         },
-        updatevideoIsPlaying: (state: ISongPlayerState, action: any) => {
+        updatevideoIsPlaying: (state: ISongPlayerState, action) => {
             state.videoIsPlaying = action.payload;
         }
     },
