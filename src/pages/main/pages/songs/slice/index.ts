@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IGeneralState } from "../../../../../models";
 import { ISongsResponse, ISongsState } from "../../../../../models/songs";
 import { GetSongs } from "../../../../../services/api";
@@ -8,6 +8,7 @@ const initialSongsState: ISongsState = {
     data: [],
     status: '',
 }
+
 
 
 export const increamentSongsAsync = createAsyncThunk(
@@ -33,7 +34,7 @@ export const songsSlice = createSlice({
       });
       builder.addCase(
         increamentSongsAsync.fulfilled,
-        (state: ISongsState, action: any) => {
+        (state: ISongsState, action:any) => {
           state.data = action.payload;
           state.status = "idle";
         }

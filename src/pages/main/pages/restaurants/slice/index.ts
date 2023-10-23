@@ -4,11 +4,17 @@ import { GetRestaurants } from "../../../../../services/api";
 import { IRestaurantResponse, IRestaurantState } from "../../../../../models/restaurants";
 import { IGeneralState } from "../../../../../models";
 
+interface Action<T, P> {
+  readonly type: T;
+  readonly payload?: P;
+}
+
 
 const initialReataurantState: IRestaurantState = {
     data: [],
     status: '',
 };
+
 
 
 export const increamentRestautantsAsync = createAsyncThunk(

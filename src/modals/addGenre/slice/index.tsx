@@ -42,7 +42,7 @@ export const addGenreSlice = createSlice({
         )
         builder.addCase(
             increamentAddGenreAsync.fulfilled,
-            (state: IAddGenreState, action: any) => {
+            (state: IAddGenreState, action) => {
                 state.status = "idle";
             }
         );

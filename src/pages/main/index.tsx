@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 import { Player, SideNav } from '../../components';
 import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 import { increamentMainSongsAsync, mainSongsInformationSelector } from './slice';
 import {
   sendSongItemData,

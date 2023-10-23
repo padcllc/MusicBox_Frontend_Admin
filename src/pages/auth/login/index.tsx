@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { organizationLoginStatusSelector, organizationLoginErrorSelector, increamentOrganizationLoginAsync } from './slice/login';
 import { Loading } from '../../../components';
 import { IOrganizationLoginData } from '../../../models/login';
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -14,14 +13,13 @@ import { useNavigate } from 'react-router-dom';
 
 export function Login() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const organizationLoginStatus = useSelector(organizationLoginStatusSelector);
     const organizationLoginError = useSelector(organizationLoginErrorSelector);
 
-    const onFinish = (values:IOrganizationLoginData) => {
+    const onFinish = (values: IOrganizationLoginData) => {
         dispatch(increamentOrganizationLoginAsync(values) as any);
-      
+
     };
 
 
@@ -66,7 +64,7 @@ export function Login() {
                             name="email"
                             rules={[
                                 { required: true, message: '', },
-                        
+
                                 {
                                     type: 'email',
                                     message: 'The input is not valid E-mail!',
@@ -75,7 +73,7 @@ export function Login() {
                                     max: 30,
                                     message: "Email should be less than 30 characters!",
                                 },
-                        ]}
+                            ]}
                         >
                             <Input placeholder='Email' className='input' />
                         </Form.Item>

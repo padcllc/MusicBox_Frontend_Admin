@@ -4,6 +4,7 @@ import { IRestaurantResponse } from "../models/restaurants";
 import { IUserResponse } from "../models/users";
 import { IAddSongData, IAddSongResponse, ISongsResponse } from "../models/songs";
 import { IAddGenreData, IAddGenreResponse, IEditGenreData, IGenreResponse } from "../models/genre";
+import { IOrganizationLoginData } from "../models/login";
 
 
 
@@ -11,7 +12,7 @@ export const OrganizationRegistration = (body: IOrganizationRegistrationData) =>
     return api.post('auth/organization/register', body);
 };
 
-export const OrganizatiolLogin = (body: any) => {
+export const OrganizatiolLogin = (body: IOrganizationLoginData) => {
     return api.post('auth/organization/login', body);
 }
 
@@ -64,7 +65,7 @@ export const AddSong = (body: IAddSongData) => {
 export const Balk = (file: any) => {
     var data = new FormData();
     data.append('file', file);
-    return api.post<any>('songs/bulk', data);
+    return api.post('songs/bulk', data);
 };
 
 export const AddGenre = (body: IAddGenreData) => {

@@ -19,18 +19,17 @@ import { message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { playerSongItemInformationSelector, updateStatus, updatevideoIsPlaying } from './slice';
 import { increamentYoutubeAsync, youtubSongsDataSelector } from './slice/getYoutubeVideo';
+import { IVideoInfoData } from '../../models/youtube';
 
 
 let interval: number;
 
-
-
 export function Player() {
     const dispatch = useDispatch();
-    const apiKey:string = import.meta.env.VITE_YOUTUBE_API_KEY;
+    const apiKey: string = import.meta.env.VITE_YOUTUBE_API_KEY;
     const [videoUrl, setVideoUrl] = useState('');
     const [videoId, setVideoId] = useState<string>('');
-    const [videoInfo, setVideoInfo] = useState<any>(null);
+    const [videoInfo, setVideoInfo] = useState<IVideoInfoData>();
     const [isPlaying, setIsPlaying] = useState(false);
 
     const [player, setPlayer] = useState<any>();

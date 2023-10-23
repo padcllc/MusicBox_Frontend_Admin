@@ -111,7 +111,7 @@ export function Genre() {
                         <img src={add} />
                     </button>
                 </div>
-                <Table columns={columns} dataSource={genreInformationData} rowKey={(record) => record.id}  pagination={{ defaultPageSize:9 }}/>
+                <Table columns={columns} dataSource={genreInformationData} rowKey={(record) => record.id} pagination={{ defaultPageSize: 9 }} />
                 <>
                     {
                         isOpenGenreModal ? <AddGenre isOpenModal={((isOpen: boolean) => {

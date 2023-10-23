@@ -30,7 +30,7 @@ export const mainSongsSlice = createSlice({
     extraReducers: (builder) => {
       builder.addCase(
         increamentMainSongsAsync.fulfilled,
-        (state: IMainSongsState, action: any) => {
+        (state: IMainSongsState, action) => {
           state.data = action.payload;
         }
       );

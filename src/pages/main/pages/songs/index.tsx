@@ -43,7 +43,7 @@ export function Songs() {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
-            render: (_, item: ISongsData | any) => {
+            render: (_, item: ISongsData) => {
                 return (
                     <div className='song_title_content'>
                         <div>
@@ -74,7 +74,7 @@ export function Songs() {
             title: '',
             dataIndex: 'edit',
             key: 'edit',
-            render: (_, item: ISongsData | any) => (
+            render: (_, item: ISongsData) => (
                 <div>
                     <img
                         src={edite}
@@ -91,7 +91,7 @@ export function Songs() {
             title: '',
             dataIndex: 'play',
             key: 'play',
-            render: (_, item: ISongsData | any) => (
+            render: (_, item: ISongsData) => (
                 <>
                     {playerSongItem?.id === item.id ?
                         <div className="animation_content">

@@ -44,7 +44,7 @@ export const editGenreSlice = createSlice({
         )
         builder.addCase(
             increamentEditGenreAsync.fulfilled,
-            (state: IEditGenreState, action: any) => {
+            (state: IEditGenreState, action) => {
                 state.status = "idle";
             }
         );

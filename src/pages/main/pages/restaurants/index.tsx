@@ -60,7 +60,6 @@ export function Restaurats() {
    const dispatch = useDispatch();
 
    const restaurantData: IRestaurantData[] = useSelector(restaurantInformation);
-   const restaurantStatusInfo = useSelector(restaurantStatus);
 
 
    useEffect(() => {
