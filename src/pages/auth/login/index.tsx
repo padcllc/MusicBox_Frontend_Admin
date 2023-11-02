@@ -31,7 +31,7 @@ export function Login() {
 
                     <img src={disk} className="reload" />
                     <div className='information_content'>
-                        <p className='information_title'>Address</p>
+                        <p className='information_title address'>Address</p>
                         <p className='information_title location'>Location</p>
                         <p className="info location_info">Mher Mkrtchyan 47/1 Gyumri, Armenia</p>
                         <p className='information_title email'>Send Us An Email</p>
