@@ -215,6 +215,6 @@ tr {
     height: 100vh;
 
     .main_outlet {
-        height: calc(100vh - 112px);
+        min-height: calc(100vh - 112px);
     }
 }
