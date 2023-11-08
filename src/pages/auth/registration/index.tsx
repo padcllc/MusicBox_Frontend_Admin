@@ -4,6 +4,7 @@ import { Form, Input } from 'antd';
 
 import disk from '../../../assets/images/disk.png';
 import address from '../../../assets/icons/adress.svg';
+import left_side_img from '../../../assets/images/auth_img.png';
 import close from '../../../assets/icons/close.svg';
 import { IOrganizationRegistrationData, IOrganizationRegistrationFormData } from '../../../models';
 import { useDispatch, useSelector } from 'react-redux';
@@ -70,7 +71,7 @@ export function Registration() {
     };
 
     const validateTextOnly = (_: any, value: string) => {
-        const regex =VALIDATION_PATTERNS.TEXT;// Regular expression to allow only alphabetic characters and spaces
+        const regex = VALIDATION_PATTERNS.TEXT;// Regular expression to allow only alphabetic characters and spaces
         if (!regex.test(value)) {
             return Promise.reject('Please enter only text');
         }
@@ -123,7 +124,7 @@ export function Registration() {
 
     return (
         <>
-            <div className="main_page">
+            {/* <div className="main_page">
                 <div className='registration_right_sids right_side'>
 
                     <Form
@@ -229,7 +230,6 @@ export function Registration() {
                                 { validator: passwordValidator }
                             ]}
                         >
-                            {/* <Input.Password /> */}
                             <Input placeholder='Password' className='input' />
                         </Form.Item>
                         <Form.Item
@@ -248,7 +248,6 @@ export function Registration() {
 
                             ]}
                         >
-                            {/* <Input.Password /> */}
                             <Input placeholder='Confirm Password' className='input' />
                         </Form.Item>
 
@@ -289,17 +288,6 @@ export function Registration() {
                 <div className='registration_left_content'>
                     <div className="animate__animated animate__fadeInRight registration_disk_animate_content">
                         <img src={disk} className="" />
-                        <div className='information_content'>
-                            <p className='information_title'>Address</p>
-                            <p className='information_title location'>Location</p>
-                            <p className="info location_info">Mher Mkrtchyan 47/1 Gyumri, Armenia</p>
-                            <p className='information_title email'>Send Us An Email</p>
-                            <p className="info email_info">musicbox@gmail.com</p>
-                            <p className='information_title phone'>Phone</p>
-                            <p className="info phone_info">(+374)94562112</p>
-                            <p className="info reserved_info">C 2021 PADC LLC All Rights Reserved</p>
-
-                        </div>
                     </div>
                     <div className="registration_left_sids">
                         <div className='registration_left_sids_description'>
@@ -309,6 +297,154 @@ export function Registration() {
 
                     </div>
                 </div>
+            </div> */}
+            <div className='registration_main_content'>
+                <Form
+                        form={form}
+                        name="basic"
+                        onFinish={onFinish}
+                        autoComplete="off"
+                        initialValues={{ remember: true }}
+                    >
+                        <p className='error_message'>{organizationRegistrationError}</p>
+                        <Form.Item
+                            name="name"
+                            rules={[{ required: true, message: '' },
+                            {
+                                validator: validateTextOnly,
+                            },
+                            {
+                                max: 50,
+                                message: "Name should be less than 50 character",
+                            },
+                            {
+                                min: 3,
+                                message: "Name must be at least 8 characters!",
+                            },
+
+
+                            ]}
+                        >
+                            <Input placeholder='Name' className='input' />
+                        </Form.Item>
+                        <div className='address_content'>
+                            <Form.Item
+                                name="address"
+                                rules={[{ required: true, message: '', }]}
+                            >
+                                <Input placeholder='Address' className='input' />
+
+                            </Form.Item>
+                            <img src={address} className='address_icon' onClick={(() => {
+                                setOpenGoogleMap(true)
+                            })} />
+                        </div>
+
+
+                        <Form.Item
+                            name="phone"
+                            rules={[{ required: true, message: '' },
+                            {
+                                validator: validatePhoneNumber,
+                            },
+
+                            ]}
+                        >
+                            <Input placeholder='Phone' className='input' />
+                        </Form.Item>
+
+
+
+                        <Form.Item
+                            name="openTime"
+                            rules={[{ required: true, message: '' }]}
+                        >
+                            <TimePicker format="HH:mm:ss" placeholder='Open Time' className='input' />
+                        </Form.Item>
+
+                        <Form.Item
+                            name="closeTime"
+                            rules={[{ required: true, message: '' }]}
+                        >
+                            <TimePicker format="HH:mm:ss" placeholder='Close Time' className='input' />
+                        </Form.Item>
+
+                        <Form.Item
+                            name="email"
+                            rules={[{ required: true, message: '' }, {
+                                type: 'email',
+                                message: 'The input is not valid E-mail!',
+                            },
+                            {
+                                max: 30,
+                                message: "Email should be less than 30 characters!",
+                            },
+                            ]}
+                        >
+                            <Input placeholder='Email' className='input' />
+                        </Form.Item>
+                        <Form.Item
+                            name="password"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: '',
+
+                                },
+                                {
+                                    min: 8,
+                                    message: 'Password must be at least 8 characters!',
+                                },
+                                {
+                                    max: 50,
+                                    message: "Password should be less than 50 characters!",
+                                },
+                                { validator: passwordValidator }
+                            ]}
+                        >
+                            <Input placeholder='Password' className='input' />
+                        </Form.Item>
+                        <Form.Item
+                            name="confirmPassword"
+                            dependencies={['password']}
+                            rules={[
+                                { required: true, message: '' },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                        if (!value || getFieldValue('password') === value) {
+                                            return Promise.resolve();
+                                        }
+                                        return Promise.reject(new Error('The new password that you entered do not match!'));
+                                    },
+                                }),
+
+                            ]}
+                        >
+                            <Input placeholder='Confirm Password' className='input' />
+                        </Form.Item>
+
+                        <Form.Item>
+                            <button className='btn'>
+                                SIGN UP
+                                {
+                                    organizationRegistrationStatus === 'loading' ? <Loading /> : null
+                                }
+
+                            </button>
+                        </Form.Item>
+                    </Form>
+
+                
+                    <div className='animatin_content animate__animated animate__fadeInRight'>
+                        <img src={disk} className="disk_img  animate__animated animate__fadeInRight" />
+                    </div>
+                    <img src={left_side_img} className='registration_page_description_img' />
+                    <div className='registration_page_description'>
+                        <p className='title'>MusicBox</p>
+                        <p>Duis tellus aenean id tellus eu ut sit magna magna. At ornare iaculis feugiat nullam morbi ut interdum. </p>
+                    </div>
+                 
+
             </div>
         </>
     )
