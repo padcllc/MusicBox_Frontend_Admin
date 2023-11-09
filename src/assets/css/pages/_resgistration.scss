@@ -56,10 +56,6 @@
   display: flex;
 }
 
-.address_content {
-  position: relative;
-}
-
 
 
 .registration_main_content {
@@ -77,7 +73,7 @@
 
     Form {
       width: 100%;
-      .address_input_form {
+      .address_content {
         position: relative;
         width: 400px;
         margin: auto;
