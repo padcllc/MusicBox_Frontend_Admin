@@ -298,8 +298,12 @@ export function Registration() {
                     </div>
                 </div>
             </div> */}
+
+
+
             <div className='registration_main_content'>
-                <Form
+                <div className='form_content'>
+                    <Form
                         form={form}
                         name="basic"
                         onFinish={onFinish}
@@ -332,12 +336,16 @@ export function Registration() {
                                 name="address"
                                 rules={[{ required: true, message: '', }]}
                             >
-                                <Input placeholder='Address' className='input' />
+                                <div className='address_input_form'>
+                                    <Input placeholder='Address' className='input' />
+                                    <img src={address} className='address_icon' onClick={(() => {
+                                        setOpenGoogleMap(true)
+                                    })} />
+                                </div>
 
                             </Form.Item>
-                            <img src={address} className='address_icon' onClick={(() => {
-                                setOpenGoogleMap(true)
-                            })} />
+
+
                         </div>
 
 
@@ -432,19 +440,42 @@ export function Registration() {
 
                             </button>
                         </Form.Item>
+                        <div className={'google_map_content ' + (openGoogleMap ? 'show-map' : 'hidden-map')}>
+                            <InitMap
+                                sendGoogleMapAddressInformation={(address: string) => {
+                                    setGoogleMapAddress(address);
+                                }}
+
+                                sendLat={(lat: number) => {
+                                    setgoogleMapLat(lat)
+                                }}
+
+                                sendLng={(lng: number) => {
+                                    setgoogleMapLng(lng)
+                                }}
+
+
+                            />
+                            <div className="close_content" onClick={(() => {
+                                setOpenGoogleMap(false)
+                            })}>
+                                <img src={close} />
+                            </div>
+                        </div>
                     </Form>
-
-                
-                    <div className='animatin_content animate__animated animate__fadeInRight'>
-                        <img src={disk} className="disk_img  animate__animated animate__fadeInRight" />
+                </div>
+                <div className='right_content animate__animated animate__fadeInRight'>
+                    <img src={disk} className='disk_img' />
+                    <img src={left_side_img} className='right_img'/>
+                    <div className="registration_right_sids">
+                        <div className='registration_right_sids_description'>
+                            <p className='title'>MusicBox</p>
+                            <p className='description'>Duis tellus aenean id tellus eu ut sit magna magna. At ornare iaculis feugiat nullam morbi ut interdum. </p>
+                        </div>
                     </div>
-                    <img src={left_side_img} className='registration_page_description_img' />
-                    <div className='registration_page_description'>
-                        <p className='title'>MusicBox</p>
-                        <p>Duis tellus aenean id tellus eu ut sit magna magna. At ornare iaculis feugiat nullam morbi ut interdum. </p>
-                    </div>
-                 
 
+
+                </div>
             </div>
         </>
     )

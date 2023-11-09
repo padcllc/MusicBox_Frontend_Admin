@@ -1,286 +1,139 @@
-// .registration_left_sids {
-//   display: flex;
+ @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
 
-//   img {
-//     height: 100%;
-//     width: 410px;
-//     position: absolute;
-//     display: flex;
-//     top: 0;
-//     right: 0;
-//     bottom: 0;
-//     left: unset !important;
-//   }
-// }
+.google_map_content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
 
-// .registration_right_sids {
-//   width: 40% !important;
-// }
+}
 
-// .registration_left_content {
-//   position: relative;
-//   display: flex;
-//   align-items: center;
-//   text-align: center;
-//   justify-content: center;
-//   overflow: hidden;
+.show-map {
+  display: block;
+  animation: fade-in 0.7s ease forwards;
+}
 
-//   .registration_left_sids {
-//     background-image: url('../../../../src/assets/images/auth_img.png');
-//     width: 400px;
-//     height: 100vh;
-//     background-position: center;
-//     background-repeat: no-repeat;
-//     background-size: cover;
-//     align-items: center;
-//     text-align: center;
-//     justify-content: center;
-//     z-index: 9;
-//     position: absolute;
-//     right: 0;
-
-//     .registration_left_sids_description {
-//       align-items: center;
-//       display: flex;
-//       flex-direction: column;
-
-//       .title {
-//         color: #FFFFFF;
-//         font-size: 60px;
-//         font-weight: 700;
-//         font-family: 'Roboto', sans-serif;
-//         margin: 0 37px;
-//       }
-
-//       p {
-//         font-family: 'Roboto', sans-serif;
-//         font-size: 24px;
-//         font-weight: 600;
-//         line-height: 40px;
-//         letter-spacing: 0em;
-//         text-align: left;
-//         color: #FFFFFF;
-//         margin: 60px 37px;
-
-//       }
-//     }
-//   }
-
-//   .registration_disk_animate_content {
-//     overflow: hidden;
-//     display: flex;
-//     align-items: center;
-//     width: 85%;
-//     position: relative;
-
-//     .information_content {
-//       position: absolute;
-//       left: 315px;
-//       display: flex;
-//       align-items: center;
-//       text-align: center;
-//       justify-content: center;
-//       flex-direction: column;
-
-//       .information_title {
-//         color: #000000;
-//         font-weight: 700;
-//         font-size: 16px;
-//         line-height: 20px;
-//         font-family: 'Roboto', sans-serif;
-//         margin: 4px 0;
-//       }
-
-//       .info {
-//         color: #000000;
-//         font-weight: 400;
-//         font-size: 12px;
-//         line-height: 17px;
-//         font-family: 'Roboto', sans-serif;
-//       }
-
-//       .email {
-//         width: 70px;
-//         margin-left: -70px;
-//       }
-
-//       .email_info {
-//         margin-left: -65px;
-//         width: 63px;
-//         line-break: anywhere;
-//       }
-
-//       .phone {
-//         margin-left: -55px;
-//       }
-
-//       .phone_info {
-//         margin-left: -55px;
-//       }
-
-//       .location {
-//         margin-left: 65px;
-//       }
-
-//       .location_info {
-//         margin-left: -50px;
-//         width: 95px;
-//         padding: 5px 0 16px 0;
-//         text-align: end;
-//       }
-
-//       .reserved_info {
-//         margin-left: 20px;
-//         width: 115px;
-//         padding: 20px 0 16px 0;
-//         text-align: end;
-//       }
-//     }
-
-//     img {
-//       height: 100vh;
-//     }
-
-//     img {
-//       -webkit-animation: spin 10s linear infinite;
-//       -moz-animation: spin 10s linear infinite;
-//       animation: spin 10s linear infinite;
-//     }
-
-//     @-webkit-keyframes spin {
-//       100% {
-//         -webkit-transform: rotate(360deg);
-//       }
-//     }
-
-//     @keyframes spin {
-//       100% {
-//         -webkit-transform: rotate(360deg);
-//         transform: rotate(360deg);
-//       }
-//     }
-//   }
-// }
+.hidden-map {
+  display: none !important;
+}
 
 
-// .address_content {
-//   position: relative;
+@keyframes fade-in {
+  from {
 
-//   .input {
-//     padding-right: 57px;
-//   }
-// }
+    transform: translateX(-100%);
+  }
 
-// .address_icon {
-//   position: absolute;
-//   bottom: 14px;
-//   right: 15px;
-//   cursor: pointer;
-// }
+  to {
+    transform: translatX(0);
+  }
 
-// .google_map_content {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   z-index: 99999;
-//   background: rgba(0, 0, 0, 0.7);
-//   display: flex;
-
-// }
-
-// .show-map {
-//   display: block;
-//   animation: fade-in 0.7s ease forwards;
-// }
-
-// .hidden-map {
-//   display: none !important;
-// }
+}
 
 
-//   @keyframes fade-in {
-//     from {
+.containerStyle__google__map {
+  width: 610px;
+  height: 100%;
+}
 
-//       transform: translateX(-100%); /* Optional: Add a slight vertical animation */
-//     }
-//     to {
-//       transform: translatX(0);
-//     }
-  
-//   }
+.close_content {
+  width: 65px;
+  height: 65px;
+  background: rgba(255, 255, 255, 1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.google_map_content {
+  display: flex;
+}
+
+.address_content {
+  position: relative;
+}
 
 
-// .containerStyle__google__map {
-//   width: 610px;
-//   height: 100%;
-// }
-
-// .close_content {
-//   width: 65px;
-//   height: 65px;
-//   background: rgba(255, 255, 255, 1);
-//   cursor: pointer;
-//   display: flex;
-//   align-items: center;
-//   text-align: center;
-//   justify-content: center;
-// }
-
-// .google_map_content {
-//   display: flex;
-// }
-
-// .address_content {
-//   position: relative;
-// }
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
 
 .registration_main_content {
   width: 100%;
   display: flex;
-  position: relative;
- // min-height: 100vh;
- // height: fit-content;
-  align-items: center;
+  justify-content: space-between;
 
-  .animatin_content {
-    overflow: hidden;
-    position: absolute;
-    right: 40px;
+  .form_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-left: 100px;
 
-    .disk_img {
-      object-fit: cover;
-      //min-height: 100vh;
-     // height: fit-content;
-      -webkit-animation: spin 10s linear infinite;
-      -moz-animation: spin 10s linear infinite;
-      animation: spin 10s linear infinite;
+    Form {
+      width: 100%;
+      .address_input_form {
+        position: relative;
+        width: 400px;
+        margin: auto;
+
+        .address_icon {
+          position: absolute;
+          right: 10px;
+          bottom: 16px;
+        }
+
+      }
+      .btn{
+        margin-top: 40px;
+      }
+      .input{
+        margin-top: 10px;
+      }
     }
   }
 
-  .registration_page_description_img {
-    position: absolute;
-    object-fit: cover;
-   // min-height: 100vh;
-   // height: fit-content;
-    right: 0;
-  }
+  .right_content {
+    overflow: hidden;
+    position: relative;
 
-  .registration_page_description {
+    .disk_img {
+      -webkit-animation: spin 10s linear infinite;
+      -moz-animation: spin 10s linear infinite;
+      animation: spin 10s linear infinite;
+      height: 100vh;
+    }
+
+    .right_img {
+      position: absolute;
+      right: -40px;
+      top: 0;
+      bottom: 0;
+      object-fit: fill;
+      height: 100vh;
+    }
+    .registration_right_sids_description{
     position: absolute;
     z-index: 9;
+    top: 0;
     right: 0;
-
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
     .title {
       color: #FFFFFF;
       font-size: 60px;
       font-weight: 700;
       font-family: 'Roboto', sans-serif;
-      margin: 0 37px;
+      // margin: 0 37px;
     }
 
     p {
@@ -291,29 +144,24 @@
       letter-spacing: 0em;
       text-align: left;
       color: #FFFFFF;
-      margin: 60px 37px;
-      width: 330px;
+      margin-top: 60px;
+      width: 300px;
+      padding: 0 25px;
 
     }
-  }
-
-  Form {
-    position: absolute;
-    left: 0;
-    padding: 0 60px;
-
-  }
-  @-webkit-keyframes spin {
-    100% {
-      -webkit-transform: rotate(360deg);
-    }
-  }
-  
-  @keyframes spin {
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
     }
   }
 }
 
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
